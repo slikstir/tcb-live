@@ -14,15 +14,6 @@ module Admin
 
     def create
       @show = Show.new(show_params)
-      if @show.save
-        redirect_to admin_show_path(@show), notice: 'Show was successfully created.'
-      else
-        render :new
-      end
-    end
-
-    def create
-      @show = Show.new(show_params)
     
       if @show.save
         redirect_to admin_show_path(@show), notice: 'Show was successfully created.'
@@ -50,7 +41,6 @@ module Admin
         end
       end
     end
-    
 
     def destroy
       @show = Show.find(params[:id])
