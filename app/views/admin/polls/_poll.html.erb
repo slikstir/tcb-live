@@ -1,0 +1,62 @@
+  <div class="row">
+    <div class="col-sm-1">
+      <div class="card">
+        <div class="card-header">
+          Order
+        </div>
+        <div class="card-body text-center">
+          <%= poll.sort %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="card">
+        <div class="card-header">
+          State
+        </div>
+        <div class="card-body text-center">
+          <%= poll.state %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="card">
+        <div class="card-header">
+          Type
+        </div>
+        <div class="card-body text-center">
+          <%= poll.kind %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          Question
+        </div>
+        <div class="card-body text-center">
+          <%= poll.question %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          Subtitle
+        </div>
+        <div class="card-body text-center">
+          <%= poll.subtitle %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%= render 'admin/polls/choices', poll: poll %>
+
+  <div class="row">
+    <div class="col text-end">
+      <%= link_to edit_admin_show_poll_path(@show, poll), class: "btn btn-warning btn-sm" do  %>
+        Edit
+      <% end %>
+    </div>
+  </div>

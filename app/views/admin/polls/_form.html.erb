@@ -1,0 +1,53 @@
+<%= bootstrap_form_with model: [:admin, @show, @poll], multipart: true do |f| %>
+
+  <div class="row">
+    <div class="col-sm-1">
+      <%= f.number_field :sort, label: "Sort", min: 0 %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.select :state, Poll::STATES %>
+    </div>
+    <div class="col-sm-2">
+      <%= f.select :kind, Poll::KINDS.map{|x, y| [y, x]} %>
+    </div>
+    <div class="col-sm-3">
+      <%= f.text_field :question %>
+    </div>
+    <div class="col-sm-4">
+      <%= f.text_field :subtitle %>
+    </div>
+  </div>
+
+    <div class="row poll-choices">
+      <% if @poll.persisted? %>
+        <h4>Choices</h4>
+        <div class="link row">
+          <div class="col-sm-1">
+          </div>
+          <div class="col-sm-1 text-center">
+            Sort
+          </div>
+          <div class="col text-center">
+            Image
+          </div>
+          <div class="col text-center">
+            Title
+          </div>
+          <div class="col text-center">
+            Subtitle
+          </div>
+          <div class="col-sm-1">
+          </div>
+        </div>
+        <div data-controller="choices" class="mb-5">
+          <div id="choices">
+            <%= f.fields_for :choices do |link_form| %>
+              <%= render 'choice_fields', f: link_form %>
+            <% end %>
+          </div>
+          <%= button_tag "Add Choice", class: "btn btn-primary btn-sm mt-2 text-end", data: { action: "click->choices#add"} %>
+        </div>
+      <% end %>
+  
+  <%= f.submit class: "btn btn-success btn-lg w-100" %>
+<% end %>

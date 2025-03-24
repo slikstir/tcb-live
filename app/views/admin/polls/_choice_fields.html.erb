@@ -1,0 +1,31 @@
+<div class="variant row">
+  <%= f.hidden_field :id %>
+  <div class="col-sm-1"></div>
+
+  <div class="col-sm-1">
+    <%= f.number_field :sort, hide_label: true, required: true %>
+  </div>
+
+  <div class="col">
+    <%= f.file_field :image, hide_label: true %>
+    <% if f.object.image.attached? %>
+        <%= image_tag f.object.image, class: "img-fluid mb-3", style: "" %>
+    <% end %>
+  </div>
+
+  <div class="col">
+    <%= f.text_field :title, hide_label: true, required: true %>
+  </div>
+
+  <div class="col">
+    <%= f.text_field :subtitle, hide_label: true, required: true %>
+  </div>
+
+  <div class="col-sm-1 text-end">
+    <button type="button" class="btn btn-danger btn-sm" data-action="click->choices#remove" data-link-target="choices">
+      Remove
+    </button>
+  </div>
+
+  <%= f.hidden_field :show, value: false %>
+</div>

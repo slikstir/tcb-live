@@ -2,135 +2,153 @@
 <%= turbo_frame_tag dom_id(@show) do %>
   <%= render 'nav' %>
 
-  <div class="row">
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          Show Name
-        </div>
-        <div class="card-body">
-          <%= @show.name %>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          Date
-        </div>
-        <div class="card-body">
-          <%= showtime @show %>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          Type/Template
-        </div>
-        <div class="card-body">
-          Template TBD
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col-3">
-      <div class="card">
-        <div class="card-header">
-          ID
-        </div>
-        <div class="card-body">
-          <%= @show.id %>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card">
-        <div class="card-header">
-          Code
-        </div>
-        <div class="card-body">
-          <%= @show.code %>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card">
-        <div class="card-header">
-          Show Status
-        </div>
-        <div class="card-body">
-          <%= @show.state %>
-        </div>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="card">
-        <div class="card-header">
-          Audience Size
-        </div>
-        <div class="card-body">
-          <%= @show.audience_size %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          Hero Image
-        </div>
-        <div class="card-body">
-          <% if @show.image.attached? %>
-            <%= image_tag @show.image, class: "img-fluid", style: "" %>
-          <% else %>
-            <%= image_tag "landscape-placeholder.svg", class: "img-fluid" %>
-          <% end %>
-          <br>
-        </div>
-      </div>
-    </div>
-    <div class="col-8">
-      <div class="card">
-        <div class="card-header">
-          Ready Page Links
-        </div>
-        <div class="card-body row">
-          <div class="col-6">
-            <div class="card">
-              <div class="card-header">
-                Label
-              </div>
-                <ul class="list-group list-group-flush">
-                <% @show.links.each do |link| %>
-                <li class="list-group-item">
-                  <%= link.label %>
-                </li>
-                <% end %>
-              </ul>
-            </div>
+  <div class="show-cards">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Show Name
           </div>
-
-          <div class="col-6">
-            <div class="card">
-              <div class="card-header">
-                URL
-              </div>
-                <ul class="list-group list-group-flush">
-                <% @show.links.each do |link| %>
-                <li class="list-group-item">
-                  <%= link.url %>
-                </li>
-                <% end %>
-              </ul>
-            </div>
+          <div class="card-body">
+            <%= @show.name %>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Date
+          </div>
+          <div class="card-body">
+            <%= showtime @show %>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Type/Template
+          </div>
+          <div class="card-body">
+            Template TBD
           </div>
         </div>
       </div>
     </div>
+
+    <div class="row mt-2">
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            ID
+          </div>
+          <div class="card-body">
+            <%= @show.id %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Code
+          </div>
+          <div class="card-body">
+            <%= @show.code %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Show Status
+          </div>
+          <div class="card-body">
+            <%= @show.state %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Audience Size
+          </div>
+          <div class="card-body">
+            <%= @show.audience_size %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Hero Image
+          </div>
+          <div class="card-body">
+            <% if @show.image.attached? %>
+              <%= image_tag @show.image, class: "img-fluid", style: "" %>
+            <% else %>
+              <%= image_tag "landscape-placeholder.svg", class: "img-fluid" %>
+            <% end %>
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="col-8">
+        <div class="card">
+          <div class="card-header">
+            Ready Page Links
+          </div>
+          <div class="card-body row">
+            <div class="col-6">
+              <div class="card">
+                <div class="card-header">
+                  Label
+                </div>
+                  <ul class="list-group list-group-flush">
+                  <% @show.links.each do |link| %>
+                  <li class="list-group-item">
+                    <%= link.label %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="card">
+                <div class="card-header">
+                  URL
+                </div>
+                  <ul class="list-group list-group-flush">
+                  <% @show.links.each do |link| %>
+                  <li class="list-group-item">
+                    <%= link.url %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            Polls
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% @show.polls.each do |poll| %>
+        <%= render 'admin/polls/poll', poll: poll %>
+      <% end %>
+    </div>
   </div>
+
+
 <% end %>

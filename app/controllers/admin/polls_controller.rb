@@ -40,6 +40,13 @@ module Admin
 
     private 
 
+    def poll_params
+      params.require(:poll).permit(
+        :question, :subtitle, 
+        :sort, :state, :kind, 
+        choices_attributes: [:id, :image, :title, :subtitle, :sort, :_destroy])
+    end
+
     def set_poll
       @poll = Poll.find(params[:id])
     end

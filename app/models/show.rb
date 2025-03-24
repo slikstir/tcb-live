@@ -20,7 +20,7 @@ class Show < ApplicationRecord
   has_one_attached :image
 
   has_many :links, dependent: :destroy
-  has_many :polls, dependent: :destroy
+  has_many :polls, -> {order(sort: :asc)}, dependent: :destroy
   has_many :show_attendees, dependent: :destroy
   has_many :attendees, through: :show_attendees
 

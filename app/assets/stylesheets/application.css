@@ -116,3 +116,32 @@ ul.timeline > li:before {
   border-style: none;
   background-color: #f3f4f6;
 }
+
+
+.poll-cards, .show-cards {
+  .col, [class^="col-"] {
+    padding: 0.2rem;
+  }
+
+  .card-header, .card-body {
+    padding: 0.5rem;
+    text-align: center;
+  }
+  .card-body {
+    font-size: 0.75rem;
+  }
+}
+
+form, input, select {
+  font-size: 0.75rem !important;
+}
+
+.poll-choices {
+  .row {
+    padding-top: 0.5em;
+  }
+  .row:nth-child(odd) {
+    background-color: #f8f9fa;
+    border-bottom: solid 1px rgb(222, 226, 230);
+  }
+}

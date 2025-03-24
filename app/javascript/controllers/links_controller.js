@@ -39,7 +39,7 @@ export default class extends Controller {
         <input type="hidden" name="show[links_attributes][${index}][show]" value="false">
 
         <div class="col d-flex align-items-center justify-content-center">
-          <button type="button" class="btn btn-danger" data-action="click->links#remove" data-link-target="link">
+          <button type="button" class="btn btn-danger btn-sm" data-action="click->links#remove" data-link-target="link">
             Remove
           </button>
         </div>      

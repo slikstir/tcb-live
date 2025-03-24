@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-1">
+    <div class="card">
+      <div class="card-header">
+        Sort
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Image
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Title
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        Subtitle
+      </div>
+    </div>
+  </div>
+</div>
+
+<% poll.choices.each do |choice| %>
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-1">
+      <div class="card h-100">
+        <div class="card-body">
+          <%= choice.sort %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <% if choice.image.attached? %>
+              <%= image_tag choice.image, class: "img-fluid mb-3", style: "max-height: 100px" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <%= choice.title %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <%= choice.subtitle %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

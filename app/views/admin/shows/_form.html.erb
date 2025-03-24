@@ -52,14 +52,14 @@
               <%= render 'link_fields', f: link_form %>
             <% end %>
           </div>
-          <%= button_tag "Add Link", class: "btn btn-primary", data: { action: "click->links#add"} %>
+          <%= button_tag "Add Link", class: "btn btn-primary btn-sm", data: { action: "click->links#add"} %>
         </div>
       <% end %>
     </div>
   </div>
   <div class="row mt-4">
     <div class="col">
-      <%= f.submit class: "btn btn-lg btn-success w-100" %>
+      <%= f.submit class: "btn btn-lg btn-success w-100 btn-sm" %>
     </div>
   </div>
 <% end %>

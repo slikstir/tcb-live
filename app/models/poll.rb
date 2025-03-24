@@ -21,5 +21,26 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 class Poll < ApplicationRecord
+
+  STATES = %w[closed open].freeze
+  KINDS = {
+    multiple_choice: "Multiple Choice",
+    yes_no: "Yes/No"
+  }.freeze
+  
   belongs_to :show
+  has_many :choices, -> { order(sort: :asc) }
+
+  accepts_nested_attributes_for :choices, allow_destroy: true
+
+  after_initialize :set_defaults, if: :new_record?
+
+  
+
+  private
+
+  def set_defaults
+    self.sort = show.polls.maximum(:sort).to_i + 1
+  end
+
 end
