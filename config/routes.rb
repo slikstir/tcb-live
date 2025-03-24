@@ -4,8 +4,12 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/", to: "admin#index"
 
-    resources :shows
+    resources :shows do 
+      resources :attendees
+      resources :polls
+    end
     resources :users
+    resources :attendees
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

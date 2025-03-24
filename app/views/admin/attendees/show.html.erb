@@ -1,0 +1,28 @@
+<%= render 'nav' %>
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          Attendee
+        </div>
+        <div class="card-body">
+          <%= @attendee.name %><br>
+          <%= @attendee.email %><br>
+          Signed Up: <%= @attendee.created_at.strftime("%B %d, %Y %I:%M %P") %><br>
+        </div>
+      </div>
+    </div>
+     <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          Shows
+        </div>
+        <div class="card-body">
+          <% 3.times do %>
+            <%= render 'show' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

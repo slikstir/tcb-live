@@ -11,10 +11,19 @@
         <div class="collapse navbar-collapse" id="navbarSubNav">
           <ul class="navbar-nav me-auto">
             <% if @show.present? && @show.persisted? %>
-            <li class="nav-item">
-              <%= link_to "Edit", edit_admin_show_path(@show), class: "nav-link" %>
-            </li>
+              <li class="nav-item">
+                <%= link_to "Edit", edit_admin_show_path(@show), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Polls", admin_show_polls_path(@show), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Attendees", admin_show_attendees_path(@show), class: "nav-link" %>
+              </li>
             <% end %>
+          </ul>
+
+          <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <%= link_to "List", admin_shows_path, class: "nav-link" %>
             </li>
@@ -22,11 +31,6 @@
               <%= link_to "New", new_admin_show_path, class: "nav-link" %>
             </li>
           </ul>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-                <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn" %>
-            </li>
-        </ul>
         </div>
       </div>
     </nav>
