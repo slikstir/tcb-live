@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    # command: rails server -b 0.0.0.0
+    command: /bin/bash -c "bundle exec rails s -b 0.0.0.0 -p 3001"
+    #command: rdbg --open --port=12345 --host=0.0.0.0 -- bin/rails server -b 0.0.0.0
+    volumes:
+      - .:/app
+      - rubygems:/bundle
+      - ./storage:/app/storage
+    ports:
+      - "3001:3001"
+      - "12345:12345" # Debugger port
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+      - DEBUGGER=true
+      - REDIS_URL=redis://redis:6379/1
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tcb_live_development
+    ports:
+      - "5432:5432"
+  
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+
+volumes:
+  rubygems:
+    name: tcb_live_gems
