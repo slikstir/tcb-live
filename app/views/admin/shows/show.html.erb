@@ -17,7 +17,7 @@
         Date
       </div>
       <div class="card-body">
-        <%= @show.date.strftime("%B %d, %Y") %>
+        <%= showtime @show %>
       </div>
     </div>
   </div>
@@ -86,9 +86,47 @@
         <% if @show.image.attached? %>
           <%= image_tag @show.image, class: "img-fluid", style: "" %>
         <% else %>
-          <%= image_tag "landscape-placeholder.svg" %>
+          <%= image_tag "landscape-placeholder.svg", class: "img-fluid" %>
         <% end %>
         <br>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header">
+        Ready Page Links
+      </div>
+      <div class="card-body row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">
+              Label
+            </div>
+              <ul class="list-group list-group-flush">
+              <% @show.links.each do |link| %>
+              <li class="list-group-item">
+                <%= link.label %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header">
+              URL
+            </div>
+              <ul class="list-group list-group-flush">
+              <% @show.links.each do |link| %>
+              <li class="list-group-item">
+                <%= link.url %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

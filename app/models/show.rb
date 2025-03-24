@@ -18,9 +18,12 @@
 #
 class Show < ApplicationRecord
   has_one_attached :image
+  has_many :links, dependent: :destroy
 
   validates :name, presence: true
 
   STATES = %w[closed open archived].freeze
+
+  accepts_nested_attributes_for :links, allow_destroy: true
 
 end

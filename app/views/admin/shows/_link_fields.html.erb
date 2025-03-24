@@ -1,0 +1,19 @@
+<div class="variant row">
+  <%= f.hidden_field :id %>
+
+  <div class="col">
+    <%= f.text_field :label, hide_label: true, required: true %>
+  </div>
+
+  <div class="col">
+    <%= f.url_field :url, hide_label: true, required: true %>
+  </div>
+
+  <div class="col d-flex align-items-center justify-content-center">
+    <button type="button" class="btn btn-danger" data-action="click->links#remove" data-link-target="links">
+      Remove
+    </button>
+  </div>
+
+  <%= f.hidden_field :show, value: false %>
+</div>

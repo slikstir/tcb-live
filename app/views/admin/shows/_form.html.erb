@@ -1,4 +1,7 @@
+<%= render 'admin/shared/record_errors', record: @show %>
+
 <%= bootstrap_form_with model: [:admin, @show], multipart: true do |f| %>
+  
   <div class="row">
     <div class="col-md-4">
       <%= f.text_field :name %>
@@ -23,8 +26,40 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <%= f.file_field :image %>
+      <%= f.file_field :image, label: "Hero Image" %>
+      <% if @show.image.attached? %>
+          <%= image_tag @show.image, class: "img-fluid", style: "" %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <% if @show.persisted? %>
+        <strong>Links</strong>
+        <div class="link row">
+          <div class="col">
+            Label
+          </div>
+
+          <div class="col">
+            URL
+          </div>
+
+          <div class="col d-flex align-items-center justify-content-center">
+          </div>
+        </div>
+        <div data-controller="links" class="mb-5">
+          <div id="links">
+            <%= f.fields_for :links do |link_form| %>
+              <%= render 'link_fields', f: link_form %>
+            <% end %>
+          </div>
+          <%= button_tag "Add Link", class: "btn btn-primary", data: { action: "click->links#add"} %>
+        </div>
+      <% end %>
     </div>
   </div>
-  <%= f.submit class: "btn btn-success" %>
+  <div class="row mt-4">
+    <div class="col">
+      <%= f.submit class: "btn btn-lg btn-success w-100" %>
+    </div>
+  </div>
 <% end %>
