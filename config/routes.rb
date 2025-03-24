@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/", to: "admin#index"
 
+    resources :shows
     resources :users
   end
 

@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Template</th>
+        <th>Code</th>
+        <th>State</th>
+        <th>Audience Size</th>
+        <th>Actions</th>
+    </thead>
+    <tbody>
+      <% @shows.each do |show| %>
+        <tr>
+          <td><%= show.id %></td>
+          <td><%= show.name %></td>
+          <td><%= show.date.strftime("%B %d, %Y") %></td>
+          <td></td>
+          <td><%= show.code %></td>
+          <td><%= show.state %></td>
+          <td><%= show.audience_size %></td>
+          <td>
+            <%= link_to admin_show_path(show), class: "btn btn-sm btn-success" do %>
+              <%= icon 'folder-open', class: 'icon-text-white' %>
+            <% end %>
+
+            <%= link_to edit_admin_show_path(show), class: "btn btn-sm btn-warning" do %>
+              <%= icon 'edit', class: 'icon-text-white' %>
+            <% end %>
+
+            <%= link_to admin_show_path(show, show: {state: :archived}), method: :patch,  class: "btn btn-sm btn-secondary" do %>
+              <%= icon 'archive-in', class: 'icon-text-white' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

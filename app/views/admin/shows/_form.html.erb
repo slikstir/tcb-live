@@ -1,0 +1,30 @@
+<%= bootstrap_form_with model: [:admin, @show], multipart: true do |f| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.text_field :name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.datetime_field :date %>
+    </div>
+    <div class="col-md-4">
+      <%= f.select :template, [] %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.text_field :code %>
+    </div>
+    <div class="col-md-4">
+      <%= f.select :state, Show::STATES %>
+    </div>
+    <div class="col-md-4">
+      <%= f.number_field :audience_size, step: 1, min: 0 %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.file_field :image %>
+    </div>
+  </div>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>

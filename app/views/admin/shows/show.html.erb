@@ -1,0 +1,95 @@
+<%= render 'nav' %>
+
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        Show Name
+      </div>
+      <div class="card-body">
+        <%= @show.name %>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        Date
+      </div>
+      <div class="card-body">
+        <%= @show.date.strftime("%B %d, %Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        Type/Template
+      </div>
+      <div class="card-body">
+        Template TBD
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        ID
+      </div>
+      <div class="card-body">
+        <%= @show.id %>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        Code
+      </div>
+      <div class="card-body">
+        <%= @show.code %>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        Show Status
+      </div>
+      <div class="card-body">
+        <%= @show.state %>
+      </div>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="card">
+      <div class="card-header">
+        Audience Size
+      </div>
+      <div class="card-body">
+        <%= @show.audience_size %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header">
+        Hero Image
+      </div>
+      <div class="card-body">
+        <% if @show.image.attached? %>
+          <%= image_tag @show.image, class: "img-fluid", style: "" %>
+        <% else %>
+          <%= image_tag "landscape-placeholder.svg" %>
+        <% end %>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
