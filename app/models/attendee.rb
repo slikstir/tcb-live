@@ -17,6 +17,8 @@ class Attendee < ApplicationRecord
 
   before_save      :normalize_email
 
+  attribute :show_code, :string
+
   def self.find_by_normalized_email(email)
     normalized = normalize_gmail(email)
     find_by("LOWER(email) = ?", normalized)

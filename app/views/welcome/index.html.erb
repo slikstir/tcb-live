@@ -1,1 +1,50 @@
-<h1>Welcome</h1>
+<div id="welcome-page" class="d-flex vh-100 justify-content-center align-items-center bg-black text-center">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12">
+        <%= image_tag "TCB_Favicon_8.png", width: 100, height: 100 %>
+        <h1>tincan.live</h1>
+        <p class="text-light">Get ready to participate in the show!</p>
+      </div>
+    </div>
+
+    <div class="row justify-content-center align-items-center ">
+      <div class="col-12 col-md-6">
+        <%= bootstrap_form_with(model: @attendee, url: attendees_path, method: :post, data: { turbo: false } ) do |form| %>
+
+          <%= form.text_field :name, class: 'bg-dark' %>
+          <%= form.email_field :email, class: 'bg-dark' %>
+          <%= form.text_field :show_code, class: 'bg-dark', required: true %>
+
+          <div class="actions mt-5">
+            <%= form.submit "Join Show", class: 'btn btn-primary w-100' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🚀 Logged In Modal -->
+  <% if flash[:alert] %>
+  <div class="modal fade" id="loggedInModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-body text-center bg-danger text-black position-relative">
+                  <!-- Close button positioned at the top-right -->
+                  <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
+                  
+                  <p class="h3"><%= flash[:alert] %></p>
+                  <%= icon 'x-circle', class: 'icon-text-white', width: 150, height: 150 %>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var loggedInModal = new bootstrap.Modal(document.getElementById("loggedInModal"));
+      loggedInModal.show();
+    });
+  </script>
+<% end %>

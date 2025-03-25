@@ -30,4 +30,8 @@ class Show < ApplicationRecord
 
   accepts_nested_attributes_for :links, allow_destroy: true
 
+  def live?
+    state == 'open'
+  end
+
 end
