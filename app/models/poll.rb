@@ -27,9 +27,12 @@ class Poll < ApplicationRecord
     'multiple_choice' => "Multiple Choice",
     'yes_no' => "Yes/No"
   }.freeze
+
+  scope :open, -> { where(state: "open") }
   
   belongs_to :show
   has_many :choices, -> { order(sort: :asc) }
+  has_many  :votes, dependent: :destroy
 
   validates :kind, inclusion: { in: KINDS.keys }
   validates :state, inclusion: { in: STATES }
@@ -41,6 +44,10 @@ class Poll < ApplicationRecord
 
   after_initialize :set_defaults, if: :new_record?
 
+  def winners
+    max_votes = choices.map { |choice| choice.votes.count }.max
+    choices.select { |choice| choice.votes.count == max_votes }
+  end
 
   private
 

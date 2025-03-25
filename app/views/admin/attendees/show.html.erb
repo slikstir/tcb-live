@@ -19,8 +19,8 @@
           Shows
         </div>
         <div class="card-body">
-          <% 3.times do %>
-            <%= render 'show' %>
+          <% @attendee.shows.each do |show| %>
+            <%= render 'show', show: show %>
           <% end %>
         </div>
       </div>

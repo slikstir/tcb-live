@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_24_220730) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_053717) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,7 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_220730) do
 
   create_table "choices", force: :cascade do |t|
     t.bigint "poll_id", null: false
-    t.integer "sort"
+    t.string "sort"
     t.string "title"
     t.string "subtitle"
     t.datetime "created_at", null: false
@@ -122,6 +122,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_220730) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "poll_id", null: false
+    t.bigint "choice_id", null: false
+    t.bigint "attendee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendee_id"], name: "index_votes_on_attendee_id"
+    t.index ["choice_id"], name: "index_votes_on_choice_id"
+    t.index ["poll_id"], name: "index_votes_on_poll_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "choices", "polls"
@@ -129,4 +140,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_220730) do
   add_foreign_key "polls", "shows"
   add_foreign_key "show_attendees", "attendees"
   add_foreign_key "show_attendees", "shows"
+  add_foreign_key "votes", "attendees"
+  add_foreign_key "votes", "choices"
+  add_foreign_key "votes", "polls"
 end

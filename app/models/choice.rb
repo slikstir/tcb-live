@@ -3,7 +3,7 @@
 # Table name: choices
 #
 #  id         :bigint           not null, primary key
-#  sort       :integer
+#  sort       :string
 #  subtitle   :string
 #  title      :string
 #  created_at :datetime         not null
@@ -21,10 +21,12 @@
 class Choice < ApplicationRecord
   belongs_to :poll
   has_one :show, through: :poll
+  has_many :votes, dependent: :destroy
 
   validates :title, presence: true
-  validates :sort, uniqueness: { scope: :poll_id }
+  validates :sort, uniqueness: { scope: :poll_id }, allow_blank: true
 
   has_one_attached :image
+
 
 end

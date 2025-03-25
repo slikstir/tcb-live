@@ -3,7 +3,7 @@
 <div id="polls" class="poll-cards">
   <% @polls.each do |poll| %>
     <%= turbo_frame_tag dom_id(poll) do %>
-      <%= render "poll", poll: poll %>
+      <%= render "poll", poll: poll, results: false %>
     <% end %>
   <% end %>
 </div>

@@ -20,13 +20,20 @@ export default class extends Controller {
   }
 
   choiceTemplate(index) {
+    const options = Array.from({ length: 26 }, (_, i) => {
+      const letter = String.fromCharCode(65 + i);
+      return `<option value="${letter}">${letter}</option>`;
+    }).join('');
+
     return `
       <c class="choice row">
         <input type="hidden" name="poll[choices_attributes][${index}][id]" id="show_choices_attributes_${index}_id">
         <div class="col-sm-1"></div>
         <div class="col-sm-1">
           <div class="mb-3">
-            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][sort]" id="show_choices_attributes_${index}_sort">
+            <select class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][sort]" id="show_choices_attributes_${index}_sort">
+              ${options}
+            </select>
           </div>
         </div>
         <div class="col">

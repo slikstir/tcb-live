@@ -1,0 +1,49 @@
+<div id="<%= dom_id(@show) %>" class="d-flex flex-column full-height">
+  <!-- Row 1: Text -->
+  <div class="container-fluid bg-danger py-3 text-white">
+    <p class="h1 text-center">
+      Vote
+    </p>
+  </div>
+
+  <% if show.image.attached? %>
+    <div class="container-fluid bg-warning p-0 text-center">
+        <%= image_tag show.image, class: "img-fluid", style: "" %>
+    </div>
+  <% end %>
+
+  <div class="container-fluid bg-dark text-warning d-flex flex-column fill-remaining align-items-center">
+    <% if @poll.subtitle %>
+      <p class="h5 text-center mb-0 pb-0 text-light">
+        <%= @poll.subtitle %>
+      </p>
+    <% end %>
+    <p class="h1 text-center">
+      <%= @poll.question %>
+    </p>
+    
+    <% if current_attendee.voted_for(@poll) %>
+      <p class="h3 text-center my-auto">
+        Vote Submitted
+      </p>
+    <% else %>
+      <%= render 'shared/record_errors', record: @vote %>
+
+      <%= bootstrap_form_with model: @vote do |f| %>
+        <%= f.hidden_field :attendee_id, value: @current_attendee.id %>
+        <%= f.hidden_field :poll_id, value: @poll.id %>
+
+        <% @poll.choices.each do |choice| %>
+          <div class="form-check">
+            <%= f.radio_button :choice_id, choice.id, label: choice.title, class: "form-check-input" %>
+            <% if choice.subtitle.present? %>
+            <%= f.label :choice_id, choice.subtitle, class: "form-check-label" %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= f.submit "Vote" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

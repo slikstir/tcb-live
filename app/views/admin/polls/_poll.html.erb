@@ -9,6 +9,18 @@
         </div>
       </div>
     </div>
+    <% if results %>
+      <div class="col-sm-1">
+        <div class="card h-100">
+          <div class="card-header">
+            Winner
+          </div>
+          <div class="card-body text-center bg-success text-light">
+            <strong><%= poll.winners.map(&:sort).join(", ") %></strong>
+          </div>
+        </div>
+      </div>
+    <% end %>
     <div class="col-sm-1">
       <div class="card">
         <div class="card-header">
@@ -51,12 +63,14 @@
     </div>
   </div>
   
-  <%= render 'admin/polls/choices', poll: poll %>
+  <%= render 'admin/polls/choices', poll: poll, results: results %>
 
-  <div class="row">
-    <div class="col text-end">
-      <%= link_to edit_admin_show_poll_path(@show, poll), class: "btn btn-warning btn-sm" do  %>
-        Edit
-      <% end %>
+  <% unless results %>
+    <div class="row">
+      <div class="col text-end">
+        <%= link_to edit_admin_show_poll_path(@show, poll), class: "btn btn-warning btn-sm" do  %>
+          Edit
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>

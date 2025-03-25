@@ -1,18 +1,20 @@
  <div class="card mb-4">
   <div class="card-header">
-      Placeholder Melbourne Debate<br>
-      <small>March 23, 2025</small>
+      <%= show.name %><br>
+      <small><%= showtime(show) %></small>
   </div>
 
   <ul class="list-group list-group-flush">
+    <% show.polls.each do |poll| %>
     <li class="list-group-item">
-      What Pokemon is most likely to show hole?<br>
-      <i>Charizard</i>
+      <%= poll.question %><br>
+      <% if poll.subtitle.present? %>
+        <small><%= poll.subtitle %></small><br>
+      <% end %>
+
+      <i><%= @attendee.answer_for(poll) %></i>
     </li>
-    <li class="list-group-item">
-      Who will sing next?<br>
-      <i>Joey Richter</i>
-    </li>
+    <% end %>
   </ul>
 
 </div>

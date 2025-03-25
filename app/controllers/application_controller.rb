@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_attendee
-    Attendee.find_by_normalized_email(session[:email])
+    @current_attendee = Attendee.find_by_normalized_email(session[:email])
   end
 end

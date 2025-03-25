@@ -14,7 +14,7 @@
 
           <%= form.text_field :name, class: 'bg-dark' %>
           <%= form.email_field :email, class: 'bg-dark' %>
-          <%= form.text_field :show_code, class: 'bg-dark', required: true %>
+          <%= form.text_field :show_code, value: params[:show_code], class: 'bg-dark', required: true %>
 
           <div class="actions mt-5">
             <%= form.submit "Join Show", class: 'btn btn-primary w-100' %>
@@ -35,7 +35,10 @@
                   <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-2" data-bs-dismiss="modal" aria-label="Close"></button>
                   
                   <p class="h3"><%= flash[:alert] %></p>
-                  <%= icon 'x-circle', class: 'icon-text-white', width: 150, height: 150 %>
+                  
+                  <%= button_tag "#", data: { bs_dismiss: "modal"}, class: "btn btn-danger" do %>
+                    <%= icon 'x-circle', class: 'icon-text-white', width: 150, height: 150 %>
+                  <% end %>
               </div>
           </div>
       </div>

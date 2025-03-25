@@ -1,0 +1,20 @@
+<div id="<%= dom_id(@show) %>" class="d-flex flex-column full-height">
+  <!-- Row 1: Text -->
+  <div class="container-fluid bg-dark py-3 text-warning">
+    <p class="h1 text-center">
+      STAND BY
+    </p>
+  </div>
+
+  <% if show.image.attached? %>
+    <div class="container-fluid bg-warning p-0 text-center">
+        <%= image_tag show.image, class: "img-fluid", style: "" %>
+    </div>
+  <% end %>
+
+  <div class="container-fluid bg-dark d-flex text-warning flex-column fill-remaining align-items-center">
+    <p class="h3 mt-auto mb-auto mx-5 my-5 text-center">
+      Stand by for the next vote.
+    </p>
+  </div>
+</div>

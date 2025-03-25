@@ -26,7 +26,7 @@ class Show < ApplicationRecord
 
   validates :name, presence: true
 
-  STATES = %w[closed preshow live archived].freeze
+  STATES = %w[closed preshow live postshow archived].freeze
 
   accepts_nested_attributes_for :links, allow_destroy: true
 
@@ -34,6 +34,14 @@ class Show < ApplicationRecord
     define_method("#{state_name}?") do
       state == state_name
     end
+  end
+
+  def public?
+    %w(preshow live postshow).include?(state)
+  end
+
+  def active_polls?
+    polls.where(state: "open").any?
   end
 
 end

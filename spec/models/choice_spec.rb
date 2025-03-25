@@ -3,7 +3,7 @@
 # Table name: choices
 #
 #  id         :bigint           not null, primary key
-#  sort       :integer
+#  sort       :string
 #  subtitle   :string
 #  title      :string
 #  created_at :datetime         not null

@@ -3,7 +3,7 @@
   <div class="col-sm-1"></div>
 
   <div class="col-sm-1">
-    <%= f.number_field :sort, hide_label: true, required: true %>
+    <%= f.select :sort, ("A".."Z").to_a, hide_label: true, required: true %>
   </div>
 
   <div class="col">

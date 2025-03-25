@@ -1,3 +1,11 @@
 <% if @show.preshow? %>
-  <%= render 'shows/preshow', show: @show %>
+  <%= render 'shows/pre_show', show: @show %>
+<% elsif @show.postshow? %>
+  <%= render 'shows/post_show', show: @show %>
+<% elsif @show.live? && @show.active_polls? %>
+  <%= render 'shows/poll', show: @show %>
+<% elsif @show.live? %>
+  <%= render 'shows/stand_by', show: @show %>
 <% end %>
+
+
