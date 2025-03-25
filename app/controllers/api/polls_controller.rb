@@ -15,12 +15,34 @@ module Api
     end
 
     def update
-      @poll = @show.polls.find_by(sort: params[:id])
-      if @poll.update(poll_params)
-        render json: @poll, status: :ok
+      poll = @show.polls.find_by(sort: params[:id])
+      if poll.update(poll_params)
+        render json: poll, status: :ok
       else
-        render json: { error: @poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
+        render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
+    rescue 
+      render json: { error: "Poll not found" }, status: :not_found
+    end
+
+    def transition 
+      poll = @show.polls.find_by(sort: params[:id])
+      if poll.update(state: params[:state])
+        render json: poll, status: :ok
+      else
+        render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    rescue 
+      render json: { error: "Poll not found" }, status: :not_found
+    end
+
+    def winner
+      poll = @show.polls.find_by(sort: params[:id])
+      winners = poll.winners
+      render json: winners.as_json(
+        only: [:sort, :title],
+        methods: [:votes_count]
+      ), status: :ok
     rescue 
       render json: { error: "Poll not found" }, status: :not_found
     end

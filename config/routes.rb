@@ -18,7 +18,15 @@ Rails.application.routes.draw do
 
   namespace :api do 
     resources :shows, only: [:index, :show, :update] do 
+      member do 
+        patch 'transition/:state', to: "shows#transition", as: :transition
+      end
+
       resources :polls, only: [:index, :show, :update] do 
+        member do 
+          patch 'transition/:state', to: "shows#transition", as: :transition
+          get 'winner', to: "polls#winner", as: :winner
+        end
         resources :choices, only: [:index, :show, :create, :update, :destroy]
       end
     end

@@ -23,6 +23,17 @@ module Api
       render json: { error: "Show not found" }, status: :not_found
     end
 
+    def transition 
+      show = Show.find(params[:id])
+      if show.update(state: params[:state])
+        render json: show, status: :ok
+      else
+        render json: { error: show.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    rescue 
+      render json: { error: "Show not found" }, status: :not_found
+    end
+
     private 
 
     def show_params
