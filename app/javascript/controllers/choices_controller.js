@@ -26,24 +26,24 @@ export default class extends Controller {
         <div class="col-sm-1"></div>
         <div class="col-sm-1">
           <div class="mb-3">
-            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][sort]" id="show_choices_attributes_${index}_show">
+            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][sort]" id="show_choices_attributes_${index}_sort">
           </div>
         </div>
         <div class="col">
           <div class="mb-3">
-            <input class="form-control" type="file" name="poll[choices_attributes][${index}][image]" id="poll_choices_attributes_1_image">
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="mb-3">
-            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][title]" id="show_choices_attributes_${index}_show">
+            <input class="form-control" type="file" name="poll[choices_attributes][${index}][image]" id="poll_choices_attributes_${index}_image">
           </div>
         </div>
 
         <div class="col">
           <div class="mb-3">
-            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][subtitle]" id="show_choices_attributes_${index}_show">
+            <input class="form-control" required="required" type="text" name="poll[choices_attributes][${index}][title]" id="show_choices_attributes_${index}_title">
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="mb-3">
+            <input class="form-control" type="text" name="poll[choices_attributes][${index}][subtitle]" id="show_choices_attributes_${index}_subtitle">
           </div>
         </div>
 
