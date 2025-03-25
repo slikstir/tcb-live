@@ -26,7 +26,29 @@ class Choice < ApplicationRecord
   validates :title, presence: true
   validates :sort, uniqueness: { scope: :poll_id }, allow_blank: true
 
+  before_save :assign_next_sort, if: -> { sort.blank? }
+
   has_one_attached :image
 
+  def votes_count
+    votes.count
+  end
+
+  def as_json(options = {})
+    super({
+      methods: [:votes_count],
+      except: [:created_at, :updated_at, :poll_id]
+    }.merge(options))
+  end
+
+  private 
+
+  def assign_next_sort
+    used_letters = self.class.pluck(:sort).compact.map(&:upcase).uniq.sort
+    all_letters = ('A'..'Z').to_a
+
+    available_letters = all_letters - used_letters
+    self.sort = available_letters.first if available_letters.any?
+  end
 
 end

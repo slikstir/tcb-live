@@ -36,12 +36,23 @@ class Show < ApplicationRecord
     end
   end
 
+  def attendees_count
+    attendees.count
+  end
+
   def public?
     %w(preshow live postshow).include?(state)
   end
 
   def active_polls?
     polls.where(state: "open").any?
+  end
+
+  def as_json(options = {})
+    super({
+      except: [:created_at, :updated_at],
+      methods: [:attendees_count]
+    }.merge(options))
   end
 
 end

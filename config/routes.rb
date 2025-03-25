@@ -16,6 +16,14 @@ Rails.application.routes.draw do
     resources :attendees
   end
 
+  namespace :api do 
+    resources :shows, only: [:index, :show, :update] do 
+      resources :polls, only: [:index, :show, :update] do 
+        resources :choices, only: [:index, :show, :create, :update, :destroy]
+      end
+    end
+  end
+
   
   root to: "welcome#index"
   get '/log_out', to: "welcome#log_out", as: :log_out

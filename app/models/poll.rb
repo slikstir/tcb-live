@@ -43,13 +43,33 @@ class Poll < ApplicationRecord
   accepts_nested_attributes_for :choices, allow_destroy: true
 
   after_initialize :set_defaults, if: :new_record?
+  before_save :destroy_votes, if: :reset_votes
+
+  attribute :reset_votes, :boolean
 
   def winners
     max_votes = choices.map { |choice| choice.votes.count }.max
     choices.select { |choice| choice.votes.count == max_votes }
   end
 
+  def as_json(options = {})
+    super({
+      except: [:created_at, :updated_at],
+      methods: [:winners],
+      include: {
+        choices: {
+          except: [:created_at, :updated_at],
+          methods: []
+        }
+      }
+    }.merge(options))
+  end
+
   private
+
+  def destroy_votes
+    votes.destroy_all
+  end
 
   def set_defaults
     self.sort = show.polls.maximum(:sort).to_i + 1
