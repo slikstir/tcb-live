@@ -6,22 +6,18 @@
     </p>
   </div>
 
-  <% if show.image.attached? %>
-    <div class="container-fluid bg-warning p-0 text-center">
-        <%= image_tag show.image, class: "img-fluid", style: "" %>
-    </div>
-  <% end %>
+  <%= render 'logo', show: show %>
 
   <div class="container-fluid bg-dark text-warning d-flex flex-column fill-remaining align-items-center">
-    <div class="mt-3">
-    <% if @poll.subtitle %>
-      <p class="h5 text-center mb-0 pb-0 text-light">
-        <%= @poll.subtitle %>
+    <div class="mt-3 col-12 col-sm-9 col-md-6 col-lg-5">
+      <% if @poll.subtitle %>
+        <p class="h5 text-center mb-0 pb-0 text-light">
+          <%= @poll.subtitle %>
+        </p>
+      <% end %>
+      <p class="h1 text-center">
+        <%= @poll.question %>
       </p>
-    <% end %>
-    <p class="h1 text-center">
-      <%= @poll.question %>
-    </p>
     </div>
     
     <% if current_attendee.voted_for(@poll) %>
@@ -32,11 +28,11 @@
       <%= render 'shared/record_errors', record: @vote %>
 
       <!-- vote form -->
-      <%= form_with model: @vote, class: "poll-form", local: true do |f| %>
+      <%= form_with model: @vote, local: true, class: "poll-form col-12 col-sm-9 col-md-6 col-lg-4 px-2" do |f| %>
         <%= f.hidden_field :attendee_id, value: @current_attendee.id %>
         <%= f.hidden_field :poll_id, value: @poll.id %>
 
-        <div class="d-grid gap-3" id="choice-buttons">
+        <div class="d-grid gap-2" id="choice-buttons">
           <% @poll.choices.each do |choice| %>
             <div class="d-flex align-items-center position-relative">
               <% if choice.image.attached? %>

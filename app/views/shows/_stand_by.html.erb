@@ -6,11 +6,7 @@
     </p>
   </div>
 
-  <% if show.image.attached? %>
-    <div class="container-fluid bg-warning p-0 text-center">
-        <%= image_tag show.image, class: "img-fluid", style: "" %>
-    </div>
-  <% end %>
+  <%= render 'logo', show: show %>
 
   <div class="container-fluid bg-dark d-flex text-warning flex-column fill-remaining align-items-center">
     <p class="h3 mt-auto mb-auto mx-5 my-5 text-center">
