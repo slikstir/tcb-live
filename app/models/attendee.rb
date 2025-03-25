@@ -20,6 +20,8 @@ class Attendee < ApplicationRecord
   attribute :show_code, :string
 
   def self.find_by_normalized_email(email)
+    return nil if email.blank? 
+    
     normalized = normalize_gmail(email)
     find_by("LOWER(email) = ?", normalized)
   end

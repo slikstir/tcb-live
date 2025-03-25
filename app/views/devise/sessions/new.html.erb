@@ -1,26 +1,33 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div id="welcome-page" class="d-flex vh-100 justify-content-center align-items-center bg-black text-center">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12">
+        <%= image_tag "TCB_Favicon_8.png", width: 100, height: 100 %>
+        <h1>Admin Login</h1>
+      </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="row justify-content-center align-items-center ">
+      <div class="col-12 col-md-6">
+        <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <%= f.text_field :email, class: 'bg-dark' %>
+          <%= f.password_field :password, class: 'bg-dark' %>
+
+          <% if devise_mapping.rememberable? %>
+              <%= f.check_box :remember_me %>
+          <% end %>
+
+          <div class="actions mt-5">
+            <%= f.submit "Log in", class: 'btn btn-primary w-100' %>
+          </div>
+        <% end %>
+      </div>
+      <!-- Not rendering intentionally
+      <% render "devise/shared/links" %>
+      -->
+    </div>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
