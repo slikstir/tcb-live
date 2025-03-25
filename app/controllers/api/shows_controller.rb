@@ -19,7 +19,7 @@ module Api
       else
         render json: { error: show.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue Exception => e
       render json: { error: "Show not found" }, status: :not_found
     end
 
@@ -38,7 +38,7 @@ module Api
 
     def show_params
       params.require(:show).permit(
-        :state
+        :state, :reset_votes
       )
     end
   end

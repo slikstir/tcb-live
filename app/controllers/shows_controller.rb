@@ -5,7 +5,10 @@ class ShowsController < ApplicationController
     @show = Show.find(params[:id])
 
     if @show.live? && @show.active_polls? 
-      @poll = @show.polls.open.first
+      # Find the first open poll that 
+      # is not already voted by the attendee
+      # Or the last poll if all polls are voted
+      @poll = @show.polls.open.where.not(id: @current_attendee.votes.pluck(:poll_id)).first || @show.polls.open.last
       @vote = Vote.new
     end
 

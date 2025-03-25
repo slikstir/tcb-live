@@ -16,7 +16,11 @@
             Winner
           </div>
           <div class="card-body text-center bg-success text-light">
-            <strong><%= poll.winners.map(&:sort).join(", ") %></strong>
+            <% if poll.votes.any? %>
+              <strong><%= poll.winners.map(&:sort).join(", ") %></strong>
+            <% else %>
+              <strong>No votes</strong>
+            <% end %>
           </div>
         </div>
       </div>
