@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   
   root to: "welcome#index"
+  get '/log_out', to: "welcome#log_out", as: :log_out
   resources :shows, only: :show
   resources :attendees, only: :create
 

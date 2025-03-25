@@ -1,0 +1,37 @@
+<div id="<%= dom_id(@show) %>" class="d-flex flex-column full-height">
+  <!-- Row 1: Text -->
+  <div class="container-fluid bg-danger py-3 text-white">
+    <p class="h1 text-center">
+      Starting Soon
+    </p>
+  </div>
+
+  <% if show.image.attached? %>
+    <div class="container-fluid bg-warning p-0 text-center">
+        <%= image_tag show.image, class: "img-fluid", style: "" %>
+    </div>
+  <% end %>
+
+  <div class="container-fluid bg-warning d-flex flex-column fill-remaining align-items-center">
+    <p class="h2 text-center text-danger m-5">
+      You're ready for the show!
+    </p>
+
+    <% show.links.each do |link| %>
+      <div class="row w-100 mb-2">
+        <div class="coltext-center">
+          <%= link_to link.url, target: :_blank, class: 'btn btn-danger w-100' do %>
+            <%= link.label %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row w-100 mt-auto mb-2">
+      <div class="col text-center">
+        <%= link_to log_out_path, class: 'btn btn-dark w-100' do %>
+         Log Out
+        <% end %>
+      </div>
+  </div>
+</div>

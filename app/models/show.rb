@@ -26,12 +26,14 @@ class Show < ApplicationRecord
 
   validates :name, presence: true
 
-  STATES = %w[closed open archived].freeze
+  STATES = %w[closed preshow live archived].freeze
 
   accepts_nested_attributes_for :links, allow_destroy: true
 
-  def live?
-    state == 'open'
+  STATES.each do |state_name|
+    define_method("#{state_name}?") do
+      state == state_name
+    end
   end
 
 end

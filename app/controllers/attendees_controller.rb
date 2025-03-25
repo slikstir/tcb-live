@@ -8,7 +8,7 @@ class AttendeesController < ApplicationController
 
 
     if (show = Show.find_by("LOWER(code) = ?", permitted_params[:show_code].downcase)).present?
-      if !show.live?
+      if !(show.live? || show.preshow?)
         redirect_to root_path, alert: "Sorry, but that show isn't live"
       else 
         show.attendees << @attendee unless show.attendees.include? @attendee
