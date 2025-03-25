@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     get "/", to: "admin#index"
 
     resources :shows do 
-      resources :attendees
+      member do 
+         get :attendees, to: "shows#attendees", as: :attendees
+      end
       resources :polls
     end
     resources :users

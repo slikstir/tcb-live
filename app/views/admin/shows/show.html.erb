@@ -143,11 +143,9 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <% @show.polls.each do |poll| %>
-        <%= render 'admin/polls/poll', poll: poll, results: true %>
-      <% end %>
-    </div>
+    <% @show.polls.each do |poll| %>
+      <%= render 'admin/polls/poll', poll: poll, results: true %>
+    <% end %>
   </div>
 
 

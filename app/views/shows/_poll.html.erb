@@ -13,6 +13,7 @@
   <% end %>
 
   <div class="container-fluid bg-dark text-warning d-flex flex-column fill-remaining align-items-center">
+    <div class="mt-3">
     <% if @poll.subtitle %>
       <p class="h5 text-center mb-0 pb-0 text-light">
         <%= @poll.subtitle %>
@@ -21,29 +22,48 @@
     <p class="h1 text-center">
       <%= @poll.question %>
     </p>
+    </div>
     
     <% if current_attendee.voted_for(@poll) %>
-      <p class="h3 text-center my-auto">
+      <p class="h1 text-large text-center my-auto">
         Vote Submitted
       </p>
     <% else %>
       <%= render 'shared/record_errors', record: @vote %>
 
-      <%= bootstrap_form_with model: @vote do |f| %>
+      <!-- vote form -->
+      <%= form_with model: @vote, class: "poll-form", local: true do |f| %>
         <%= f.hidden_field :attendee_id, value: @current_attendee.id %>
         <%= f.hidden_field :poll_id, value: @poll.id %>
 
-        <% @poll.choices.each do |choice| %>
-          <div class="form-check">
-            <%= f.radio_button :choice_id, choice.id, label: choice.title, class: "form-check-input" %>
-            <% if choice.subtitle.present? %>
-            <%= f.label :choice_id, choice.subtitle, class: "form-check-label" %>
-            <% end %>
-          </div>
-        <% end %>
+        <div class="d-grid gap-3" id="choice-buttons">
+          <% @poll.choices.each do |choice| %>
+            <div class="d-flex align-items-center position-relative">
+              <% if choice.image.attached? %>
+                <label for="vote_choice_<%= choice.id %>" class="choice-label">
+                  <%= image_tag choice.image.variant(resize_to_fill: [64, 64]), class: "rounded-circle me-3", alt: choice.title %>
+                </label>
+              <% end %>
 
-        <%= f.submit "Vote" %>
+              <%= f.radio_button :choice_id, choice.id, class: "visually-hidden", id: "vote_choice_#{choice.id}", required: true %>
+
+              <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn btn-danger btn-lg w-100 choice-label">
+                <div class="fw-bold text-uppercase"><%= choice.title %></div>
+                <% if choice.subtitle.present? %>
+                  <div class="text-warning text-uppercase small"><%= choice.subtitle %></div>
+                <% end %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="mt-3">
+          <%= f.submit "Vote", class: "btn btn-warning btn-lg w-100", disabled: true, id: "vote-submit" %>
+        </div>
       <% end %>
+
+      <!-- end vote form -->
+
     <% end %>
   </div>
 </div>

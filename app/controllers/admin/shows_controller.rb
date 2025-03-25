@@ -1,5 +1,7 @@
 module Admin
   class ShowsController < AdminController
+    include Pagy::Backend
+    
     def index
       @shows = Show.all
     end
@@ -46,6 +48,11 @@ module Admin
       @show = Show.find(params[:id])
       @show.destroy
       redirect_to admin_shows_path, notice: 'Show was successfully destroyed.'
+    end
+
+    def attendees
+      @show = Show.find(params[:id])
+      @pagy, @attendees = pagy(@show.attendees)
     end
 
     private 

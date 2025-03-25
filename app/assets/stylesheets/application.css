@@ -44,3 +44,15 @@ html, body {
   flex: 1 1 auto;
   /* overflow-y: auto; */
 }
+
+.choice-label.not-selected {
+  opacity: 0.5;
+  filter: grayscale(100%);
+  transition: all 0.2s ease;
+}
+
+.choice-label.selected {
+  opacity: 1;
+  filter: none;
+  outline: 3px solid #0d6efd;
+}

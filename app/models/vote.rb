@@ -26,6 +26,4 @@ class Vote < ApplicationRecord
   belongs_to :choice
   belongs_to :poll
 
-  validates :attendee_id, uniqueness: { scope: :poll_id }
-
 end
