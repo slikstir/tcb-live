@@ -1,3 +1,6 @@
+<%= turbo_stream_from 'page_reload' %>
+<div id="page_reload"></div>
+
 <% if @show.preshow? %>
   <%= render 'shows/pre_show', show: @show %>
 <% elsif @show.postshow? %>

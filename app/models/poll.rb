@@ -44,6 +44,8 @@ class Poll < ApplicationRecord
 
   after_initialize :set_defaults, if: :new_record?
   before_save :destroy_votes, if: :reset_votes
+  
+  after_save :broadcast_page_reload, if: :saved_change_to_state?
 
   attribute :reset_votes, :boolean
 
@@ -73,6 +75,14 @@ class Poll < ApplicationRecord
 
   def set_defaults
     self.sort = show.polls.maximum(:sort).to_i + 1
+  end
+
+  def broadcast_page_reload
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "page_reload",
+      target: "page_reload",
+      partial: "shared/reload"
+    )
   end
 
 end

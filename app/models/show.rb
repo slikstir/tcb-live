@@ -24,6 +24,8 @@ class Show < ApplicationRecord
   has_many :show_attendees, dependent: :destroy
   has_many :attendees, through: :show_attendees
 
+  after_save :broadcast_page_reload, if: :saved_change_to_state?
+
   validates :name, presence: true
 
   STATES = %w[closed preshow live postshow archived].freeze
@@ -53,6 +55,16 @@ class Show < ApplicationRecord
       except: [:created_at, :updated_at],
       methods: [:attendees_count]
     }.merge(options))
+  end
+
+  private
+
+  def broadcast_page_reload
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "page_reload",
+      target: "page_reload",
+      partial: "shared/reload"
+    )
   end
 
 end
