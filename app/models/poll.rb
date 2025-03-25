@@ -24,18 +24,23 @@ class Poll < ApplicationRecord
 
   STATES = %w[closed open].freeze
   KINDS = {
-    multiple_choice: "Multiple Choice",
-    yes_no: "Yes/No"
+    'multiple_choice' => "Multiple Choice",
+    'yes_no' => "Yes/No"
   }.freeze
   
   belongs_to :show
   has_many :choices, -> { order(sort: :asc) }
 
+  validates :kind, inclusion: { in: KINDS.keys }
+  validates :state, inclusion: { in: STATES }
+  validates :question, presence: true
+  
+  validates :sort, uniqueness: { scope: :show_id }
+
   accepts_nested_attributes_for :choices, allow_destroy: true
 
   after_initialize :set_defaults, if: :new_record?
 
-  
 
   private
 

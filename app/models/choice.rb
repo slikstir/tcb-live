@@ -22,6 +22,9 @@ class Choice < ApplicationRecord
   belongs_to :poll
   has_one :show, through: :poll
 
+  validates :title, presence: true
+  validates :sort, uniqueness: { scope: :poll_id }
+
   has_one_attached :image
 
 end
