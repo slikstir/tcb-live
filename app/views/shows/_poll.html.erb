@@ -21,7 +21,7 @@
     </div>
     
     <% if current_attendee.voted_for(@poll) %>
-      <p class="h5text-large text-center my-auto">
+      <p class="h2 text-large text-center my-auto">
         Vote Submitted
       </p>
     <% else %>
@@ -36,8 +36,10 @@
           <% @poll.choices.each do |choice| %>
             <div class="d-flex align-items-center position-relative">
               <% if choice.image.attached? %>
+                <% choice.image.analyze unless choice.image.analyzed? %>
+                <% ratio = choice.image.metadata[:width].to_f/choice.image.metadata[:height].to_f %>
                 <label for="vote_choice_<%= choice.id %>" class="choice-label">
-                  <%= image_tag choice.image.variant(resize_to_fill: [64, 64]), class: "rounded-circle me-3", alt: choice.title %>
+                  <%= image_tag choice.image.variant(resize_to_fill: [72, 72]), style: "height: 100%; width: 72px", class: "rounded-circle me-3", alt: choice.title %>
                 </label>
               <% end %>
 
