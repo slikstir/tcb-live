@@ -38,6 +38,8 @@ class Template < ApplicationRecord
 
   before_create :initialize_values
 
+  has_many :shows, -> { where.not(state: 'archived')}
+
   validates :name, presence: true, uniqueness: true
 
   attr_accessor :remove_dark_page_bg

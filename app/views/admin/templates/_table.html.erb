@@ -1,0 +1,30 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Associated Shows</th>
+        <th style="width: 200px" class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @templates.each do |template| %>
+        <tr>
+          <td><%= template.name %></td>
+          <td><%= template.shows.map(&:name).join(", ") %></td>
+          <td class="text-end">
+            <%= link_to admin_template_path(template), class: "btn btn-sm btn-success" do %>
+              <%= icon 'folder-open', class: 'icon-text-white' %>
+            <% end %>
+            <%= link_to edit_admin_template_path(template), class: "btn btn-sm btn-warning"  do  %>
+              <%= icon 'edit', class: 'icon-text-white' %>
+            <% end %>
+            <%= link_to admin_template_path(template), method: :delete, 
+                      data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" do %>
+              <%= icon 'trash', class: 'icon-text-white' %>
+            <% end %>        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

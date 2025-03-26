@@ -34,6 +34,12 @@ module Admin
       end
     end
 
+    def destroy
+      @template = Template.find(params[:id])
+      @template.destroy
+      redirect_to admin_templates_path, notice: "Template deleted"
+    end
+
     private 
 
     def template_params 
