@@ -1,6 +1,6 @@
 <div id="<%= dom_id(@show) %>" class="d-flex flex-column full-height">
   <!-- Row 1: Text -->
-  <div class="container-fluid bg-danger py-3 text-white">
+  <div class="container-fluid py-3 template-heading ">
     <p class="h1 text-center">
       Vote
     </p>
@@ -8,10 +8,10 @@
 
   <%= render 'logo', show: show %>
 
-  <div class="container-fluid bg-dark text-warning d-flex flex-column fill-remaining align-items-center">
+  <div class="container-fluid text-warning d-flex flex-column fill-remaining align-items-center template-dark-page">
     <div class="mt-3 col-12 col-sm-9 col-md-6 col-lg-5">
       <% if @poll.subtitle %>
-        <p class="h5 text-center mb-0 pb-0 text-light">
+        <p class="h5 text-center mb-0 pb-0">
           <%= @poll.subtitle %>
         </p>
       <% end %>
@@ -21,7 +21,7 @@
     </div>
     
     <% if current_attendee.voted_for(@poll) %>
-      <p class="h1 text-large text-center my-auto">
+      <p class="h5text-large text-center my-auto">
         Vote Submitted
       </p>
     <% else %>
@@ -43,7 +43,7 @@
 
               <%= f.radio_button :choice_id, choice.id, class: "visually-hidden", id: "vote_choice_#{choice.id}", required: true %>
 
-              <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn btn-danger btn-lg w-100 choice-label">
+              <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn template-btn-choice btn-lg w-100 choice-label">
                 <div class="fw-bold text-uppercase"><%= choice.title %></div>
                 <% if choice.subtitle.present? %>
                   <div class="text-warning text-uppercase small"><%= choice.subtitle %></div>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="mt-3">
-          <%= f.submit "Vote", class: "btn btn-warning btn-lg w-100", disabled: true, id: "vote-submit" %>
+          <%= f.submit "Vote", class: "btn template-btn-vote btn-lg w-100 text-bold text-uppercase", disabled: true, id: "vote-submit" %>
         </div>
       <% end %>
 

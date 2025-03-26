@@ -1,70 +1,70 @@
 <style>
   .template-heading {
-    background-color: <%= @template.heading_bg_color %>;
-    color: <%= @template.heading_text_color %>;
+    background-color: <%= template.heading_bg_color %>;
+    color: <%= template.heading_text_color %>;
   }
 
   .template-btn-choice {
-    background-color: <%= @template.choice_color %>;
-    border-color: <%= @template.choice_outline %>;
-    color: <%= @template.choice_title_color %>;
+    background-color: <%= template.choice_color %>;
+    border-color: <%= template.choice_outline %>;
+    color: <%= template.choice_title_color %>;
   }
 
   .template-btn-choice-title {
-    color: <%= @template.choice_title_color %>;
+    color: <%= template.choice_title_color %>;
   }
 
   .template-btn-choice-subtitle {
-    color: <%= @template.choice_subtitle_color %>;
+    color: <%= template.choice_subtitle_color %>;
   }
 
   .template-dark-page {
-    .h5 {
-      color: <%= @template.dark_page_subtitles %>;
+    .h5, .h3, .h2 {
+      color: <%= template.dark_page_subtitles %>;
     }
     .h1 {
-      color: <%= @template.dark_page_titles %>;
+      color: <%= template.dark_page_titles %>;
     }
 
-    <% if @template.dark_page_bg.attached? %>
-      background-image: url(<%= url_for(@template.dark_page_bg) %>);
+    <% if template.dark_page_bg.attached? %>
+      background-image: url(<%= url_for(template.dark_page_bg) %>);
     <% end %>
 
-    background-color: <%= @template.dark_page_bg_color %>;
+    background-color: <%= template.dark_page_bg_color %>;
   }
 
 
   .template-light-page {
-    .h5 {
-      color: <%= @template.light_page_subtitles %>;
+     .h5, .h3, .h2 {
+      color: <%= template.light_page_subtitles %>;
     }
     .h1 {
-      color: <%= @template.light_page_titles %>;
+      color: <%= template.light_page_titles %>;
     }
 
-    <% if @template.light_page_bg.attached? %>
-      background-image: url(<%= url_for(@template.light_page_bg) %>);
+    <% if template.light_page_bg.attached? %>
+      background-image: url(<%= url_for(template.light_page_bg) %>);
     <% end %>
 
-    background-color: <%= @template.light_page_bg_color %>;
+    background-color: <%= template.light_page_bg_color %>;
   }
 
   .template-btn-vote {
-    background-color: <%= @template.vote_color %>;
-    border-color: <%= @template.vote_outline_color %>;
-    color: <%= @template.vote_text_color %>;
+    background-color: <%= template.vote_color %>;
+    border-color: <%= template.vote_outline_color %>;
+    color: <%= template.vote_text_color %>;
   }
 
   .template-btn-log-out {
-    background-color: <%= @template.log_out_color %>;
-    border-color: <%= @template.log_out_outline_color %>;
-    color: <%= @template.log_out_text_color %>;
+    background-color: <%= template.log_out_color %>;
+    border-color: <%= template.log_out_outline_color %>;
+    color: <%= template.log_out_text_color %>;
   }
 
   .template-btn-log-out:hover {
-    background-color: <%= @template.log_out_color %>;
-    border-color: <%= @template.log_out_outline_color %>;
-    color: <%= @template.log_out_text_color %>;
+    background-color: <%= template.log_out_color %>;
+    border-color: <%= template.log_out_outline_color %>;
+    color: <%= template.log_out_text_color %>;
   }
 
 </style>

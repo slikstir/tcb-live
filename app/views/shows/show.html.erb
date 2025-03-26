@@ -1,6 +1,12 @@
 <%= turbo_stream_from 'page_reload' %>
 <div id="page_reload"></div>
 
+<% if @show.template.present? %>
+  <% content_for :show_css do %>
+    <%= render 'admin/templates/css', template: @show.template %>
+  <% end %>
+<% end %>
+
 <% if @show.preshow? %>
   <%= render 'shows/pre_show', show: @show %>
 <% elsif @show.postshow? %>
