@@ -1,0 +1,104 @@
+<%= bootstrap_form_with model: [:admin, @template], multipart: true do |f| %>
+  <%= f.text_field :name %>
+  <% if f.object.persisted? %>
+    <div class="row">
+      <h4>Heading</h4>
+      <div class="col-4">
+        <%= f.color_field :heading_bg_color, label: "Background Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :heading_text_color, label: "Text Color"  %>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4>Dark Page</h4>
+      <div class="col-4">
+        <%= f.color_field :dark_page_bg_color, label: "Background Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :dark_page_subtitles, label: "Subtitle Color"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :dark_page_titles, label: "Title Color"  %>
+      </div>
+      <div class="col-8">
+        <%= f.file_field :dark_page_bg, label: "Background Image"  %>
+      </div>
+      <div class="col-4">
+        <% if @template.dark_page_bg.attached? %>
+          <%= image_tag @template.dark_page_bg, class: "img w-100" %>
+          <%= f.check_box :remove_dark_page_bg, {}, "1", "0"%>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <h4>Light Page</h4>
+      <div class="col-4">
+        <%= f.color_field :light_page_bg_color, label: "Background Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :light_page_subtitles, label: "Subtitle Color"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :light_page_titles, label: "Title Color"  %>
+      </div>
+      <div class="col-8">
+        <%= f.file_field :light_page_bg, label: "Background Image"  %>
+      </div>
+      <div class="col-4">
+        <% if @template.light_page_bg.attached? %>
+          <%= image_tag @template.light_page_bg, class: "img w-100" %>
+          <%= f.check_box :remove_light_page_bg, {}, "1", "0"%>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <h4>Choices</h4>
+      <div class="col-4">
+        <%= f.color_field :choice_color, label: "Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :choice_outline, label: "Outline"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :choice_selected_outline, label: "Selected Outline"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :choice_title_color, label: "Title Color"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :choice_subtitle_color, label: "Subtitle Color"  %>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4>Vote Button</h4>
+      <div class="col-4">
+        <%= f.color_field :vote_color, label: "Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :vote_outline_color, label: "Outline"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :vote_text_color, label: "Text"  %>
+      </div>
+    </div>
+
+    <div class="row">
+      <h4>Log Out Button</h4>
+      <div class="col-4">
+        <%= f.color_field :log_out_color, label: "Color" %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :log_out_outline_color, label: "Outline"  %>
+      </div>
+      <div class="col-4">
+        <%= f.color_field :log_out_text_color, label: "Text"  %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.submit class: "btn btn-lg btn-success w-100" %>
+<% end %>

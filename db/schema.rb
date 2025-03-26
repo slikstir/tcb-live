@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_25_053717) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_25_234137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -99,6 +99,34 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_25_053717) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["template_id"], name: "index_shows_on_template_id"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.string "heading_bg_color"
+    t.string "heading_text_color"
+    t.string "light_page_bg_color"
+    t.string "light_page_titles"
+    t.string "light_page_subtitles"
+    t.string "dark_page_bg_color"
+    t.string "dark_page_titles"
+    t.string "dark_page_subtitles"
+    t.string "choice_color"
+    t.string "choice_title_color"
+    t.string "choice_subtitle_color"
+    t.string "choice_outline"
+    t.string "choice_selected_outline"
+    t.string "vote_color"
+    t.string "vote_outline_color"
+    t.string "vote_text_color"
+    t.string "log_out_text_color"
+    t.string "log_out_color"
+    t.string "log_out_outline_color"
+    t.text "google_fonts_embed"
+    t.text "font_family_1"
+    t.text "font_family_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

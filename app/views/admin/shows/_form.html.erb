@@ -10,7 +10,7 @@
       <%= f.datetime_field :date %>
     </div>
     <div class="col-md-4">
-      <%= f.select :template, [] %>
+      <%= f.select :template_id, @templates.map{|x| [x.name, x.id] }, include_blank: true %>
     </div>
   </div>
   <div class="row">

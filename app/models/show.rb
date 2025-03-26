@@ -24,6 +24,8 @@ class Show < ApplicationRecord
   has_many :show_attendees, dependent: :destroy
   has_many :attendees, through: :show_attendees
 
+  belongs_to :template, optional: true
+
   before_save :destroy_votes, if: :reset_votes
   after_save :broadcast_page_reload, if: :saved_change_to_state?
 

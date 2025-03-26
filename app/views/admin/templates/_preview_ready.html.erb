@@ -1,0 +1,52 @@
+<div class="d-flex flex-column">
+  <!-- Row 1: Text -->
+  <div class="container-fluid template-heading py-3">
+    <p class="h1 text-center">
+      Starting Soon
+    </p>
+  </div>
+
+  <div class="container-fluid template-light-page p-0 text-center">
+    <div class="text-center mx-auto">
+      Logo Here
+    </div>
+  </div>
+
+
+  <div class="container-fluid template-light-page d-flex flex-column fill-remaining align-items-center">
+    <p class="h2 text-center text-danger m-5">
+      You're ready for the show!
+    </p>
+
+    <div class="row w-100 mb-2">
+      <div class="col text-center">
+        <%= link_to "#", target: :_blank, class: 'btn template-btn-choice w-100' do %>
+          About the Show
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row w-100 mb-2">
+      <div class="col text-center">
+        <%= link_to "#", target: :_blank, class: 'btn template-btn-choice w-100' do %>
+          Tonight's Cast
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row w-100 mb-2">
+      <div class="col text-center">
+        <%= link_to "#", target: :_blank, class: 'btn template-btn-choice w-100' do %>
+          Merch
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row w-100 mt-auto mb-2">
+      <div class="col text-center">
+        <%= link_to "#", class: 'btn template-btn-log-out w-100' do %>
+         Log Out
+        <% end %>
+      </div>
+  </div>
+</div>

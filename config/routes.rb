@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    get "templates/new"
+    get "templates/show"
+    get "templates/edit"
     get "/", to: "admin#index"
 
     resources :shows do 
@@ -14,6 +17,7 @@ Rails.application.routes.draw do
     end
     resources :users
     resources :attendees
+    resources :templates
   end
 
   namespace :api do 

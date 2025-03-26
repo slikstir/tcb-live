@@ -1,6 +1,8 @@
 module Admin
   class ShowsController < AdminController
     include Pagy::Backend
+
+    before_action :find_records, only: [:edit, :create, :update, :new]
     
     def index
       @shows = Show.all
@@ -65,6 +67,8 @@ module Admin
       )
     end
 
-
+    def find_records
+      @templates = Template.all
+    end
   end
 end
