@@ -49,8 +49,8 @@ module Admin
         :dark_page_subtitles, :choice_color, :choice_title_color, 
         :choice_subtitle_color, :choice_outline, 
         :choice_selected_outline, :vote_color, 
-        :vote_outline_color, :vote_text_color, 
-        :log_out_text_color, :log_out_color, 
+        :vote_outline_color, :vote_text_color, :heading_text_color, 
+        :log_out_text_color, :log_out_color, :heading_bg_color, 
         :log_out_outline_color, :google_fonts_embed, 
         :font_family_1, :font_family_2, :dark_page_bg, :light_page_bg,
         :remove_dark_page_bg, :remove_light_page_bg
