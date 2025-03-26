@@ -9,7 +9,6 @@ class VotesController < ApplicationController
     if @vote.save
       redirect_to show_path(@show), notice: "Your vote has been recorded"
     else
-      byebug
       render "shows/show"
     end
   end

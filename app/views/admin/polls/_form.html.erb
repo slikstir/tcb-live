@@ -10,10 +10,17 @@
     <div class="col-sm-2">
       <%= f.select :kind, Poll::KINDS.map{|x, y| [y, x]} %>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
+      <%= f.file_field :image %>
+      <% if f.object.image.attached? %>
+        <%= image_tag f.object.image, class: "img-fluid mb-3", style: "" %>
+        <%= f.check_box :remove_image, {}, "1", "0"%>
+      <% end %>
+    </div>
+    <div class="col-sm-2">
       <%= f.text_field :question %>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <%= f.text_field :subtitle %>
     </div>
   </div>

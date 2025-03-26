@@ -16,7 +16,15 @@ export default class extends Controller {
 
   remove(event) {
     event.preventDefault();
-    event.target.closest(".choice").remove();
+    const choiceEl = event.target.closest(".choice");
+  
+    const destroyField = choiceEl.querySelector("input[name*='_destroy']");
+    if (destroyField) {
+      destroyField.value = "1";
+      choiceEl.style.display = "none";
+    } else {
+      choiceEl.remove();
+    }
   }
 
   choiceTemplate(index) {

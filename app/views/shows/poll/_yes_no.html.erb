@@ -1,0 +1,17 @@
+<div class="container mt-5" id="choice-buttons">
+  <% @poll.choices.each_slice(2) do |pair| %>
+    <div class="row mb-3">
+      <% pair.each do |choice| %>
+        <div class="col-6 d-flex align-items-center">
+          <%= f.radio_button :choice_id, choice.id, class: "visually-hidden", id: "vote_choice_#{choice.id}", required: true %>
+          <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn template-btn-choice btn-lg w-100 choice-label">
+            <div class="text-uppercase"><%= choice.title %></div>
+            <% if choice.subtitle.present? %>
+              <div class="text-warning text-uppercase small"><%= choice.subtitle %></div>
+            <% end %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

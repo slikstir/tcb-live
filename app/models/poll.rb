@@ -29,9 +29,11 @@ class Poll < ApplicationRecord
   }.freeze
 
   scope :open, -> { where(state: "open") }
-  
+
+  has_one_attached :image
+
   belongs_to :show
-  has_many :choices, -> { order(sort: :asc) }
+  has_many :choices, -> { order(sort: :asc) }, dependent: :destroy
   has_many  :votes, dependent: :destroy
 
   validates :kind, inclusion: { in: KINDS.keys }
@@ -43,11 +45,22 @@ class Poll < ApplicationRecord
   accepts_nested_attributes_for :choices, allow_destroy: true
 
   after_initialize :set_defaults, if: :new_record?
+
+  before_save :purge_image, if: :remove_image?
   before_save :destroy_votes, if: :reset_votes
   
   after_save :broadcast_page_reload, if: :saved_change_to_state?
 
+  before_destroy :purge_image
+
+  attribute :remove_image, :boolean
   attribute :reset_votes, :boolean
+
+  KINDS.each do |key, val|
+    define_method("#{key}?") do
+      key == kind
+    end
+  end
 
   def winners
     max_votes = choices.map { |choice| choice.votes.count }.max
@@ -68,6 +81,10 @@ class Poll < ApplicationRecord
   end
 
   private
+  
+  def purge_image
+    image.purge_later
+  end
 
   def destroy_votes
     votes.destroy_all

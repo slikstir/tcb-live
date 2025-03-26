@@ -1,0 +1,22 @@
+<div class="d-grid gap-2" id="choice-buttons">
+  <% @poll.choices.each do |choice| %>
+    <div class="d-flex align-items-center position-relative">
+      <% if choice.image.attached? %>
+        <% choice.image.analyze unless choice.image.analyzed? %>
+        <% ratio = choice.image.metadata[:width].to_f/choice.image.metadata[:height].to_f %>
+        <label for="vote_choice_<%= choice.id %>" class="choice-label">
+          <%= image_tag choice.image.variant(resize_to_fill: [72, 72]), style: "height: 100%; width: 72px", class: "rounded-circle me-3", alt: choice.title %>
+        </label>
+      <% end %>
+
+      <%= f.radio_button :choice_id, choice.id, class: "visually-hidden", id: "vote_choice_#{choice.id}", required: true %>
+
+      <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn template-btn-choice btn-lg w-100 choice-label">
+        <div class="text-uppercase"><%= choice.title %></div>
+        <% if choice.subtitle.present? %>
+          <div class="text-warning text-uppercase small"><%= choice.subtitle %></div>
+        <% end %>
+      </label>
+    </div>
+  <% end %>
+</div>

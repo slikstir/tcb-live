@@ -18,7 +18,6 @@ module Api
 
     def create
       choice = @poll.choices.new(choice_params)
-      byebug
       if choice.save
         render json: choice, status: :created
       else
