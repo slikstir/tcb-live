@@ -5,6 +5,13 @@
   <% content_for :show_css do %>
     <%= render 'admin/templates/css', template: @show.template %>
   <% end %>
+
+  <% if @show.template.google_fonts_embed.present? %>
+    <% content_for :google_fonts do %>
+      <%= raw @show.template.google_fonts_embed %>
+    <% end %>
+  <% end %>
+
 <% end %>
 
 <% if @show.preshow? %>

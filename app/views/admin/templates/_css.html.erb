@@ -2,6 +2,10 @@
   .template-heading {
     background-color: <%= template.heading_bg_color %>;
     color: <%= template.heading_text_color %>;
+
+    <% if template.font_family_1 %>
+      font-family: <%= raw template.font_family_1 %>;
+    <% end %>
   }
 
   .template-btn-choice {
@@ -12,15 +16,27 @@
 
   .template-btn-choice-title {
     color: <%= template.choice_title_color %>;
+
+    <% if template.font_family_1 %>
+      font-family: <%= raw template.font_family_1 %>;
+    <% end %>
   }
 
   .template-btn-choice-subtitle {
     color: <%= template.choice_subtitle_color %>;
+
+    <% if template.font_family_2 %>
+      font-family: <%= raw template.font_family_2 %>;
+    <% end %>
   }
 
   .template-dark-page {
     .h5, .h3, .h2 {
       color: <%= template.dark_page_subtitles %>;
+      
+      <% if template.font_family_2 %>
+        font-family: <%= raw template.font_family_2 %>;
+      <% end %>
     }
     .h1 {
       color: <%= template.dark_page_titles %>;
@@ -31,12 +47,20 @@
     <% end %>
 
     background-color: <%= template.dark_page_bg_color %>;
+
+    <% if template.font_family_1 %>
+      font-family: <%= raw template.font_family_1 %>;
+    <% end %>
   }
 
 
   .template-light-page {
      .h5, .h3, .h2 {
       color: <%= template.light_page_subtitles %>;
+
+      <% if template.font_family_2 %>
+        font-family: <%= raw template.font_family_2 %>;
+      <% end %>
     }
     
     .h1 {
@@ -48,6 +72,10 @@
     <% end %>
 
     background-color: <%= template.light_page_bg_color %>;
+
+    <% if template.font_family_1 %>
+      font-family: <%= raw template.font_family_1 %>;
+    <% end %>
   }
 
   .template-btn-vote {

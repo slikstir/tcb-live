@@ -99,6 +99,19 @@
         <%= f.color_field :log_out_text_color, label: "Text"  %>
       </div>
     </div>
+
+    <div class="row">
+      <h4>Fonts</h4>
+      <div class="col-6">
+        <%= f.text_field :font_family_1, label: "Font Family 1" %>
+      </div>
+      <div class="col-6">
+        <%= f.text_field :font_family_2, label: "Font Family 2"  %>
+      </div>
+      <div class="col-12">
+        <%= f.text_area :google_fonts_embed, label: "Google Fonts Embed Code"  %>
+      </div>
+    </div>
   <% end %>
   <%= f.submit class: "btn btn-lg btn-success w-100" %>
 <% end %>

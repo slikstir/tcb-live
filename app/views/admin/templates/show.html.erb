@@ -1,5 +1,12 @@
 <%= render 'nav' %>
 
+<% if @template.google_fonts_embed.present? %>
+  <% content_for :google_fonts do %>
+    <%= raw @template.google_fonts_embed %>
+  <% end %>
+<% end %>
+
+
 <%= render 'css', template: @template %>
 
 <div class="row">
