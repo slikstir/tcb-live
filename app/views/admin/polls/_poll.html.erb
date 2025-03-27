@@ -17,7 +17,12 @@
           </div>
           <div class="card-body text-center bg-success text-light">
             <% if poll.votes.any? %>
-              <strong><%= poll.winners.map(&:sort).join(", ") %></strong>
+              <strong><%= poll.winners.map(&:sort).join(", ") %></strong><br>
+              <%= link_to admin_show_poll_path(@show, poll, poll: {reset_votes: :true}), 
+                  method: :patch,
+                  data: {confirm: "Are you sure you want to reset the poll?"} do %>
+                <%= icon 'reset', class: 'icon-text-white' %>
+              <% end %>
             <% else %>
               <strong>No votes</strong>
             <% end %>

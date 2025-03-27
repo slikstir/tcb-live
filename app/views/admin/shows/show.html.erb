@@ -139,6 +139,11 @@
         <div class="card">
           <div class="card-header">
             Polls
+              <%= link_to admin_show_path(@show, show: {reset_votes: :true}), 
+                  method: :patch,
+                  data: {confirm: "Are you sure you want to reset the show votes?"} do %>
+                <%= icon 'reset' %>
+              <% end %>
           </div>
         </div>
       </div>

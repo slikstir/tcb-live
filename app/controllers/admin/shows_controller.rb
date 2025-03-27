@@ -61,7 +61,7 @@ module Admin
 
     def show_params
       params.require(:show).permit(
-        :name, :template_id, :date, 
+        :name, :template_id, :date, :reset_votes, 
         :state, :code, :audience_size, :image,
         links_attributes: [ :id, :label, :url, :_destroy]
       )

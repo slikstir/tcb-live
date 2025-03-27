@@ -42,7 +42,7 @@ module Admin
 
     def poll_params
       params.require(:poll).permit(
-        :question, :subtitle, :image,
+        :question, :subtitle, :image, :reset_votes, 
         :sort, :state, :kind, :remove_image, 
         choices_attributes: [:id, :image, :title, :subtitle, :sort, :remove_image,  :_destroy])
     end
