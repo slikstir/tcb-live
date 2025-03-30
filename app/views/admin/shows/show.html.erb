@@ -87,7 +87,7 @@
           </div>
           <div class="card-body">
             <% if @show.image.attached? %>
-              <%= image_tag @show.image, class: "img-fluid", style: "" %>
+              <%= image_tag rails_public_blob_url(@show.image), class: "img-fluid", style: "" %>
             <% else %>
               <%= image_tag "landscape-placeholder.svg", class: "img-fluid" %>
             <% end %>

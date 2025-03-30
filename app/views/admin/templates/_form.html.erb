@@ -27,7 +27,7 @@
       </div>
       <div class="col-4">
         <% if @template.dark_page_bg.attached? %>
-          <%= image_tag @template.dark_page_bg, class: "img w-100" %>
+          <%= image_tag rails_public_blob_url(@template.dark_page_bg), class: "img w-100" %>
           <%= f.check_box :remove_dark_page_bg, {}, "1", "0"%>
         <% end %>
       </div>
@@ -48,7 +48,7 @@
       </div>
       <div class="col-4">
         <% if @template.light_page_bg.attached? %>
-          <%= image_tag @template.light_page_bg, class: "img w-100" %>
+          <%= image_tag rails_public_blob_url(@template.light_page_bg), class: "img w-100" %>
           <%= f.check_box :remove_light_page_bg, {}, "1", "0"%>
         <% end %>
 

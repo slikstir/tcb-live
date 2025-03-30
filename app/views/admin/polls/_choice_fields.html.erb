@@ -9,7 +9,7 @@
   <div class="col">
     <%= f.file_field :image, hide_label: true %>
     <% if f.object.image.attached? %>
-        <%= image_tag f.object.image, class: "img-fluid mb-3", style: "" %>
+        <%= image_tag rails_public_blob_url(f.object.image), class: "img-fluid mb-3", style: "" %>
           <%= f.check_box :remove_image, {}, "1", "0"%>
     <% end %>
   </div>

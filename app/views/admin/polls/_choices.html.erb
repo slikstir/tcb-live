@@ -64,7 +64,7 @@
       <div class="card h-100">
         <div class="card-body">
           <% if choice.image.attached? %>
-              <%= image_tag choice.image, class: "img-fluid mb-3", style: "max-height: 100px" %>
+              <%= image_tag rails_public_blob_url(choice.image), class: "img-fluid mb-3", style: "max-height: 100px" %>
           <% end %>
         </div>
       </div>

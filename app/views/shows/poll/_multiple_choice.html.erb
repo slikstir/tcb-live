@@ -5,7 +5,7 @@
         <% choice.image.analyze unless choice.image.analyzed? %>
         <% ratio = choice.image.metadata[:width].to_f/choice.image.metadata[:height].to_f %>
         <label for="vote_choice_<%= choice.id %>" class="choice-label">
-          <%= image_tag choice.image.variant(resize_to_fill: [72, 72]), style: "height: 100%; width: 72px", class: "rounded-circle me-3", alt: choice.title %>
+          <%= image_tag rails_public_blob_url(choice.image.variant(resize_to_fill: [72, 72])), style: "height: 100%; width: 72px", class: "rounded-circle me-3", alt: choice.title %>
         </label>
       <% end %>
 
