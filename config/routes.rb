@@ -26,13 +26,13 @@ Rails.application.routes.draw do
         patch 'transition/:state', to: "shows#transition", as: :transition
       end
 
-      resources :polls, only: [:index, :show, :update] do 
+      resources :polls do 
         member do 
           patch 'transition/:state', to: "polls#transition", as: :transition
 
           get 'winner', to: "polls#winner", as: :winner
         end
-        resources :choices, only: [:index, :show, :create, :update, :destroy]
+        resources :choices
       end
     end
   end

@@ -51,11 +51,9 @@ module Api
 
     def poll_params
       params.require(:poll).permit(
-        :question, :subtitle, 
-        :sort, :state, :kind, 
-        :reset_votes,
-        choices_attributes: [:id, :image, :title, :subtitle, :sort, :_destroy]
-      )
+        :question, :subtitle, :image, :reset_votes, 
+        :sort, :state, :kind, :remove_image, 
+        choices_attributes: [:id, :image, :title, :subtitle, :sort, :remove_image,  :_destroy])
     end
 
     def set_records
