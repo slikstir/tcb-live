@@ -14,6 +14,17 @@ module Api
       render json: { error: "Poll not found" }, status: :not_found
     end
 
+    def create
+      poll = @show.polls.new(poll_params)
+      if poll.save
+        render json: poll, status: :created
+      else
+        render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
+      end
+    rescue 
+      render json: { error: "Show not found or Poll Params Failed" }, status: :not_found
+    end
+
     def update
       poll = @show.polls.find_by(sort: params[:id])
       if poll.update(poll_params)
