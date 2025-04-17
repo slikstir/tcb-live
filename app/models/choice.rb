@@ -32,7 +32,7 @@ class Choice < ApplicationRecord
   before_destroy :purge_image
 
   has_one_attached :image
-  
+
   attribute :remove_image, :boolean
 
   def votes_count
@@ -41,23 +41,22 @@ class Choice < ApplicationRecord
 
   def as_json(options = {})
     super({
-      methods: [:votes_count],
-      except: [:created_at, :updated_at, :poll_id]
+      methods: [ :votes_count ],
+      except: [ :created_at, :updated_at, :poll_id ]
     }.merge(options))
   end
 
-  private 
-  
+  private
+
   def purge_image
     image.purge_later
   end
 
   def assign_next_sort
-    used_letters = self.class.pluck(:sort).compact.map(&:upcase).uniq.sort
-    all_letters = ('A'..'Z').to_a
+    used_letters = self.class.where(poll_id: self.poll_id).pluck(:sort).compact.map(&:upcase).uniq.sort
+    all_letters = ("A".."Z").to_a
 
     available_letters = all_letters - used_letters
     self.sort = available_letters.first if available_letters.any?
   end
-
 end

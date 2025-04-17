@@ -12,4 +12,4 @@ User.create(
   email: "ricky@annarbortees.com",
   password: "pw4Ricky",
   password_confirmation: "pw4Ricky"
-)
+) unless User.find_by(email: "ricky@annarbortees.com").present?

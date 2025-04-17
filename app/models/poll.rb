@@ -21,11 +21,10 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 class Poll < ApplicationRecord
-
   STATES = %w[closed open].freeze
   KINDS = {
-    'multiple_choice' => "Multiple Choice",
-    'yes_no' => "Yes/No"
+    "multiple_choice" => "Multiple Choice",
+    "yes_no" => "Yes/No"
   }.freeze
 
   scope :open, -> { where(state: "open") }
@@ -39,7 +38,7 @@ class Poll < ApplicationRecord
   validates :kind, inclusion: { in: KINDS.keys }
   validates :state, inclusion: { in: STATES }
   validates :question, presence: true
-  
+
   validates :sort, uniqueness: { scope: :show_id }
 
   accepts_nested_attributes_for :choices, allow_destroy: true
@@ -48,7 +47,7 @@ class Poll < ApplicationRecord
 
   before_save :purge_image, if: :remove_image?
   before_save :destroy_votes, if: :reset_votes
-  
+
   after_save :broadcast_page_reload, if: :saved_change_to_state?
 
   before_destroy :purge_image
@@ -69,11 +68,11 @@ class Poll < ApplicationRecord
 
   def as_json(options = {})
     super({
-      except: [:created_at, :updated_at],
-      methods: [:winners],
+      except: [ :created_at, :updated_at ],
+      methods: [ :winners ],
       include: {
         choices: {
-          except: [:created_at, :updated_at],
+          except: [ :created_at, :updated_at ],
           methods: []
         }
       }
@@ -81,7 +80,7 @@ class Poll < ApplicationRecord
   end
 
   private
-  
+
   def purge_image
     image.purge_later
   end
@@ -91,7 +90,7 @@ class Poll < ApplicationRecord
   end
 
   def set_defaults
-    self.sort = show.polls.maximum(:sort).to_i + 1
+    self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank?
   end
 
   def broadcast_page_reload
@@ -101,5 +100,4 @@ class Poll < ApplicationRecord
       partial: "shared/reload"
     )
   end
-
 end
