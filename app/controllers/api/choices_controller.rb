@@ -5,14 +5,14 @@ module Api
     def index
       choices = @poll.choices.order(:sort)
       render json: choices.as_json(
-        except: [:created_at, :updated_at]
+        except: [ :created_at, :updated_at ]
       ), status: :ok
     end
 
     def show
       choice = @poll.choices.find_by(sort: params[:id])
       render json: choice, status: :ok
-    rescue 
+    rescue
       render json: { error: "Choice not found" }, status: :not_found
     end
 
@@ -23,7 +23,7 @@ module Api
       else
         render json: { error: choice.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Choice not found" }, status: :not_found
     end
 
@@ -34,7 +34,7 @@ module Api
       else
         render json: { error: choice.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Choice not found" }, status: :not_found
     end
 
@@ -45,13 +45,13 @@ module Api
     rescue ActiveRecord::RecordNotFound
       render json: { error: "Choice not found" }, status: :not_found
     end
-    
 
-    private 
+    private
 
     def choice_params
       params.require(:choice).permit(
-        :id, :image, :title, :subtitle, :sort, :remove_image, 
+        :id, :image, :title, :subtitle, :sort, :remove_image,
+        :force_vote_count
       )
     end
 

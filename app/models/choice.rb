@@ -28,12 +28,14 @@ class Choice < ApplicationRecord
 
   before_save :assign_next_sort, if: -> { sort.blank? }
   before_save :purge_image, if: :remove_image?
+  before_save :purge_and_create_votes, if: :force_vote_count?
 
   before_destroy :purge_image
 
   has_one_attached :image
 
   attribute :remove_image, :boolean
+  attribute :force_vote_count, :integer
 
   def votes_count
     votes.count
@@ -50,6 +52,20 @@ class Choice < ApplicationRecord
 
   def purge_image
     image.purge_later
+  end
+
+  def purge_and_create_votes
+    return if force_vote_count.blank?
+    return if force_vote_count <= 0
+
+    votes.destroy_all
+    force_vote_count.times do
+      votes.create(
+        choice: self,
+        poll: poll,
+        attendee: nil
+      )
+    end
   end
 
   def assign_next_sort

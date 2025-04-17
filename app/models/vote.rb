@@ -5,7 +5,7 @@
 #  id          :bigint           not null, primary key
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  attendee_id :bigint           not null
+#  attendee_id :bigint
 #  choice_id   :bigint           not null
 #  poll_id     :bigint           not null
 #
@@ -22,8 +22,7 @@
 #  fk_rails_...  (poll_id => polls.id)
 #
 class Vote < ApplicationRecord
-  belongs_to :attendee
+  belongs_to :attendee, optional: true
   belongs_to :choice
   belongs_to :poll
-
 end
