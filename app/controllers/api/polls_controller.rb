@@ -10,7 +10,7 @@ module Api
     def show
       poll = @show.polls.find_by(sort: params[:id])
       render json: poll, status: :ok
-    rescue 
+    rescue
       render json: { error: "Poll not found" }, status: :not_found
     end
 
@@ -21,7 +21,7 @@ module Api
       else
         render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Show not found or Poll Params Failed" }, status: :not_found
     end
 
@@ -32,18 +32,18 @@ module Api
       else
         render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Poll not found" }, status: :not_found
     end
 
-    def transition 
+    def transition
       poll = @show.polls.find_by(sort: params[:id])
       if poll.update(state: params[:state])
         render json: poll, status: :ok
       else
         render json: { error: poll.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Poll not found" }, status: :not_found
     end
 
@@ -51,25 +51,24 @@ module Api
       poll = @show.polls.find_by(sort: params[:id])
       winners = poll.winners
       render json: winners.as_json(
-        only: [:sort, :title],
-        methods: [:votes_count]
+        only: [ :sort, :title ],
+        methods: [ :votes_count ]
       ), status: :ok
-    rescue 
+    rescue
       render json: { error: "Poll not found" }, status: :not_found
     end
 
-    private 
+    private
 
     def poll_params
       params.require(:poll).permit(
-        :question, :subtitle, :image, :reset_votes, 
-        :sort, :state, :kind, :remove_image, 
-        choices_attributes: [:id, :image, :title, :subtitle, :sort, :remove_image,  :_destroy])
+        :question, :subtitle, :image, :reset_votes,
+        :sort, :state, :kind, :remove_image,
+        choices_attributes: [ :id, :image, :title, :subtitle, :sort, :remove_image, :force_vote_count, :_destroy ])
     end
 
     def set_records
       @show = Show.find(params[:show_id])
     end
-
   end
 end
