@@ -73,7 +73,7 @@ class Poll < ApplicationRecord
       include: {
         choices: {
           except: [ :created_at, :updated_at ],
-          methods: []
+          methods: [ :votes_count ]
         }
       }
     }.merge(options))
