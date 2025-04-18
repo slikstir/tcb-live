@@ -72,7 +72,7 @@ class Poll < ApplicationRecord
       methods: [ :winners ],
       include: {
         choices: {
-          except: [ :created_at, :updated_at ],
+          except: [ :created_at, :updated_at, :remove_image, :force_vote_count ],
           methods: [ :votes_count ]
         }
       }
