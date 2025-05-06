@@ -39,7 +39,7 @@ class Choice < ApplicationRecord
   attribute :force_vote_count, :integer
 
   def votes_count
-    votes.count
+    votes.sum(&:count)
   end
 
   def as_json(options = {})
@@ -64,7 +64,8 @@ class Choice < ApplicationRecord
       votes.create(
         choice: self,
         poll: poll,
-        attendee: nil
+        attendee: nil,
+        count: 1
       )
     end
   end

@@ -55,7 +55,7 @@
       <div class="col-sm-1">
         <div class="card h-100">
           <div class="card-body">
-            <strong><%= choice.votes.count %></strong>
+            <strong><%= choice.votes.sum(&:count) %></strong>
           </div>
         </div>
       </div>

@@ -68,8 +68,8 @@ class Poll < ApplicationRecord
   end
 
   def winners
-    max_votes = choices.map { |choice| choice.votes.count }.max
-    choices.select { |choice| choice.votes.count == max_votes }
+    max_votes = choices.map { |choice| choice.votes.sum(&:count) }.max
+    choices.select { |choice| choice.votes.sum(&:count) == max_votes }
   end
 
   def as_json(options = {})

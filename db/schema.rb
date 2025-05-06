@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_06_182728) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_06_191720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -179,6 +179,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_182728) do
     t.bigint "attendee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "count", default: 1, null: false
     t.index ["attendee_id"], name: "index_votes_on_attendee_id"
     t.index ["choice_id"], name: "index_votes_on_choice_id"
     t.index ["poll_id"], name: "index_votes_on_poll_id"
