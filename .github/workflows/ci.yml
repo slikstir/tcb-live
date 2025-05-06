@@ -50,7 +50,7 @@ jobs:
           done
 
       - name: Run DB setup
-        run: docker-compose exec -T web bundle exec rails db:prepare
+        run: docker compose exec -T web bundle exec rails db:prepare
 
       - name: Run RSpec (including browser tests)
-        run: docker-compose exec -T web bundle exec rspec
+        run: docker compose exec -T web bundle exec rspec
