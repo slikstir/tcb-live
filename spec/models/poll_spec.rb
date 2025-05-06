@@ -23,5 +23,25 @@
 require 'rails_helper'
 
 RSpec.describe Poll, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'associations' do
+    it { should belong_to(:show) }
+    it { should have_many(:choices) }
+    it { should have_many(:votes) }
+  end
+
+  context 'validations' do
+    it { should validate_presence_of(:question) }
+  end
+
+  context 'default values' do
+    it 'sets default state to closed' do
+      poll = Poll.new
+      expect(poll.state).to eq('closed')
+    end
+
+    it 'sets default sort to 0' do
+      poll = Poll.new
+      expect(poll.sort).to eq(0)
+    end
+  end
 end

@@ -32,5 +32,14 @@
 require 'rails_helper'
 
 RSpec.describe Template, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'associations' do
+    it { should have_one_attached(:dark_page_bg) }
+    it { should have_one_attached(:light_page_bg) }
+    it { should have_many(:shows) }
+  end
+
+  context 'validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_uniqueness_of(:name) }
+  end
 end

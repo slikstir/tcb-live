@@ -10,6 +10,7 @@
 #
 FactoryBot.define do
   factory :attendee do
-    
+    name { "John Doe" }
+    email { "johndoe@example.com" }
   end
 end

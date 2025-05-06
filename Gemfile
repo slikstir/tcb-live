@@ -35,8 +35,12 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  gem "factory_bot_rails", "~> 6.4"
-  gem "rspec-rails", "~> 7.1"
+  gem "factory_bot_rails"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "faker"
 end
 
 gem "turbo-rails", "~> 2.0"
@@ -56,13 +60,13 @@ gem "rails_icons", "~> 1.1"
 gem "rqrcode"
 gem "chunky_png"
 
-gem 'public_activity'
+gem "public_activity"
 
 gem "image_processing", "~> 1.14"
-gem 'mini_magick', '~> 5.0'
-gem 'ruby-vips', '~> 2.2'
-gem 'ffi'
-gem 'active_storage_validations'
+gem "mini_magick", "~> 5.0"
+gem "ruby-vips", "~> 2.2"
+gem "ffi"
+gem "active_storage_validations"
 
-gem 'state_machines-activerecord'
-gem 'stripe'
+gem "state_machines-activerecord"
+gem "stripe"

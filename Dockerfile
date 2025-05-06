@@ -17,6 +17,12 @@ RUN gem install debug pry-byebug
 
 # Copy the Gemfiles and install gems
 COPY Gemfile Gemfile.lock ./
+ENV BUNDLE_PATH=/bundle \
+    BUNDLE_JOBS=4 \
+    BUNDLE_RETRY=3
+
+# Copy Gemfiles and install gems (caching layer)
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
 # Copy the app

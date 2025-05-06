@@ -38,7 +38,7 @@ class Template < ApplicationRecord
 
   before_create :initialize_values
 
-  has_many :shows, -> { where.not(state: 'archived')}
+  has_many :shows, -> { where.not(state: "archived") }
 
   validates :name, presence: true, uniqueness: true
 
@@ -56,29 +56,28 @@ class Template < ApplicationRecord
   end
 
   def initialize_values
-    self.heading_bg_color        = '#D80118'
-    self.heading_text_color      = '#FFCB0A'
+    self.heading_bg_color        = "#D80118"
+    self.heading_text_color      = "#FFCB0A"
 
-    self.choice_color            = '#D80118'
-    self.choice_outline          = '#B70215'
-    self.choice_selected_outline = '#FFCB0a'
-    self.choice_subtitle_color   = '#FFCB0a'
-    self.choice_title_color      = '#FFFFFF'
+    self.choice_color            = "#D80118"
+    self.choice_outline          = "#B70215"
+    self.choice_selected_outline = "#FFCB0a"
+    self.choice_subtitle_color   = "#FFCB0a"
+    self.choice_title_color      = "#FFFFFF"
 
-    self.dark_page_bg_color      = '#000000'
-    self.dark_page_subtitles     = '#FFFFFF'
-    self.dark_page_titles        = '#FFCB0A'
+    self.dark_page_bg_color      = "#000000"
+    self.dark_page_subtitles     = "#FFFFFF"
+    self.dark_page_titles        = "#FFCB0A"
 
-    self.light_page_bg_color     = '#FFCB0A'
-    self.light_page_subtitles    = '#FFFFFF'
-    self.light_page_titles       = '#D80118'
-    self.log_out_color           = '#000000'
-    self.log_out_outline_color   = '#CCCCCC'
-    self.log_out_text_color      = '#FFCB0A'
+    self.light_page_bg_color     = "#FFCB0A"
+    self.light_page_subtitles    = "#FFFFFF"
+    self.light_page_titles       = "#D80118"
+    self.log_out_color           = "#000000"
+    self.log_out_outline_color   = "#CCCCCC"
+    self.log_out_text_color      = "#FFCB0A"
 
-    self.vote_color              = '#FFCBOA'
-    self.vote_outline_color      = '#C49C04'
-    self.vote_text_color         = '#D80118'
+    self.vote_color              = "#FFCBOA"
+    self.vote_outline_color      = "#C49C04"
+    self.vote_text_color         = "#D80118"
   end
-  
 end

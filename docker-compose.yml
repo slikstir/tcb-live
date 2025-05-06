@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   web:
     build: .
@@ -19,6 +18,7 @@ services:
     depends_on:
       - db
       - redis
+      - selenium
 
   db:
     image: postgres:15
@@ -28,6 +28,17 @@ services:
       POSTGRES_DB: tcb_live_development
     ports:
       - "5432:5432"
+
+  selenium:
+    image: seleniarm/standalone-chromium:latest
+    ports: ['4444:4444', '5900:5900']
+      # Bind selenium port & VNC port
+    environment:
+      - SCREEN_WIDTH=1600
+      - SCREEN_HEIGHT=1200
+    logging:
+      driver: none
+      # Disable noisy logs.
   
   redis:
     image: redis:7

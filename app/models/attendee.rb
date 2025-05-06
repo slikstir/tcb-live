@@ -14,21 +14,21 @@ class Attendee < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   validates :name, :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-  before_save      :normalize_email
+  before_save :normalize_email
 
   attribute :show_code, :string
 
   def self.find_by_normalized_email(email)
-    return nil if email.blank? 
-    
+    return nil if email.blank?
+
     normalized = normalize_gmail(email)
     find_by("LOWER(email) = ?", normalized)
   end
 
   def self.normalize_gmail(email)
-    return email.downcase unless email.match?(/@gmail\.com\z/i)
+    return email.to_s.downcase unless email.to_s.match?(/@gmail\.com\z/i)
 
     local, domain = email.split("@")
     local.gsub!(".", "") # Remove dots in the local part
@@ -48,5 +48,4 @@ class Attendee < ApplicationRecord
   def normalize_email
     self.email = self.class.normalize_gmail(email)
   end
-
 end

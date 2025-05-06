@@ -20,7 +20,7 @@ class Show < ApplicationRecord
   has_one_attached :image
 
   has_many :links, dependent: :destroy
-  has_many :polls, -> {order(sort: :asc)}, dependent: :destroy
+  has_many :polls, -> { order(sort: :asc) }, dependent: :destroy
   has_many :show_attendees, dependent: :destroy
   has_many :attendees, through: :show_attendees
 
@@ -48,7 +48,7 @@ class Show < ApplicationRecord
   end
 
   def public?
-    %w(preshow live postshow).include?(state)
+    %w[preshow live postshow].include?(state)
   end
 
   def active_polls?
@@ -57,15 +57,15 @@ class Show < ApplicationRecord
 
   def as_json(options = {})
     super({
-      except: [:created_at, :updated_at],
-      methods: [:attendees_count]
+      except: [ :created_at, :updated_at ],
+      methods: [ :attendees_count ]
     }.merge(options))
   end
 
   private
 
   def destroy_votes
-    polls.each{|p| p.votes.destroy_all }
+    polls.each { |p| p.votes.destroy_all }
   end
 
   def broadcast_page_reload
@@ -75,5 +75,4 @@ class Show < ApplicationRecord
       partial: "shared/reload"
     )
   end
-
 end
