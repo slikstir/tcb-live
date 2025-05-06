@@ -24,12 +24,14 @@
     <%= f.text_field :subtitle, hide_label: true %>
   </div>
 
+  <% unless f.object.poll.yes_no? %>
   <div class="col-sm-1 text-end">
     <button type="button" class="btn btn-danger btn-sm" data-action="click->choices#remove" data-link-target="choices">
       Remove
     </button>
   </div>
 
-  <%= f.hidden_field :show, value: false %>
-  <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+    <%= f.hidden_field :show, value: false %>
+    <%= f.hidden_field :_destroy, class: "destroy-flag" %>
+  <% end %>
 </div>
