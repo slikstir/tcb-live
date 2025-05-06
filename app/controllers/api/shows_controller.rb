@@ -8,7 +8,7 @@ module Api
     def show
       show = Show.find(params[:id])
       render json: show, status: :ok
-    rescue 
+    rescue
       render json: { error: "Show not found" }, status: :not_found
     end
 
@@ -23,18 +23,18 @@ module Api
       render json: { error: "Show not found" }, status: :not_found
     end
 
-    def transition 
+    def transition
       show = Show.find(params[:id])
       if show.update(state: params[:state])
         render json: show, status: :ok
       else
         render json: { error: show.errors.full_messages.to_sentence }, status: :unprocessable_entity
       end
-    rescue 
+    rescue
       render json: { error: "Show not found" }, status: :not_found
     end
 
-    private 
+    private
 
     def show_params
       params.require(:show).permit(

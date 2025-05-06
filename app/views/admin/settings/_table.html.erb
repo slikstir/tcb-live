@@ -1,0 +1,30 @@
+<div class="table-responsive">
+  <table class="table mb-5 table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Setting</th>
+        <th scope="col">Description</th>
+        <th scope="col">Type</th>
+        <th scope="col">Value</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <% @settings.each do |setting| %>
+      <tr>
+        <td><%= setting.name %><br>
+            <i><%= setting.code %></i></td>
+        <td><%= setting.description %></td>
+        <td><%= setting.value_type %></td>
+        <td><%= setting.value unless setting.value_type == 'text' %></td>
+        <td>
+           <%= link_to admin_setting_path(setting), class: "btn btn-sm btn-success" do %>
+              <%= icon 'folder-open', class: 'icon-text-white' %>
+            <% end %>
+            <%= link_to edit_admin_setting_path(setting), class: "btn btn-sm btn-warning"  do  %>
+              <%= icon 'edit', class: 'icon-text-white' %>
+            <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

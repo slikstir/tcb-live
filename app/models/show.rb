@@ -18,6 +18,7 @@
 #
 class Show < ApplicationRecord
   has_one_attached :image
+  has_rich_text :footer
 
   has_many :links, dependent: :destroy
   has_many :polls, -> { order(sort: :asc) }, dependent: :destroy

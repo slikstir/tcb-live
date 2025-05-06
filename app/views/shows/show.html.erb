@@ -24,4 +24,9 @@
   <%= render 'shows/stand_by', show: @show %>
 <% end %>
 
-
+<% if @footer.present? || @show.footer.present? %>
+  <div class="container-fluid template-heading py-3 text-center">
+      <%= @show.footer.to_s %>
+      <%= @footer %>
+  </div>
+<% end %>

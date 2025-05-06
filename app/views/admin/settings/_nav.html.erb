@@ -1,0 +1,25 @@
+<% content_for :sub_nav do %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <%= link_to "Settings", admin_settings_path, class: 'navbar-brand' %>
+        <% if @setting.present? && @setting.persisted? %>
+          <%= link_to "#{@setting.name} (#{@setting.code})", admin_setting_path(@setting),  class: 'navbar-brand' %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSubNav">
+          <ul class="navbar-nav me-auto">
+            <% if @setting.present? && @setting.persisted? %>
+            <li class="nav-item">
+              <%= link_to "Edit", edit_admin_setting_path(@setting), class: "nav-link" %>
+            </li>
+            <% end %>
+            <li class="nav-item">
+              <%= link_to "List", admin_settings_path, class: "nav-link" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<% end %>

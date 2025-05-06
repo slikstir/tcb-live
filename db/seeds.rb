@@ -13,3 +13,10 @@ User.create(
   password: "pw4Ricky",
   password_confirmation: "pw4Ricky"
 ) unless User.find_by(email: "ricky@annarbortees.com").present?
+
+Setting.create(
+  name: 'Footer',
+  code: 'footer',
+  description: 'Global footer',
+  value_type: 'html'
+) unless Setting.find_by(code: 'footer').present?

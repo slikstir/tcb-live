@@ -1,12 +1,13 @@
 class ShowsController < ApplicationController
   before_action :check_for_attendee_logged_in
   before_action :check_if_attendee_part_of_show
+  before_action :find_settings
 
   def show
     @show = Show.find(params[:id])
 
-    if @show.live? && @show.active_polls? 
-      # Find the first open poll that 
+    if @show.live? && @show.active_polls?
+      # Find the first open poll that
       # is not already voted by the attendee
       # Or the last poll if all polls are voted
       @poll = @show.polls.open.where.not(id: @current_attendee.votes.pluck(:poll_id)).first || @show.polls.open.last
