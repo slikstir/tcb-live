@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Attendee Voting Interactions', type: :feature, js: true do
+  let(:email) { Faker::Internet.email }
   feature 'As an attendee who has joined a live show with two multiple-choice polls' do
-    let(:email) { Faker::Internet.email }
     include_context "with a live show and two multiple-choice polls"
 
     context 'and I have not voted yet' do
@@ -38,5 +38,7 @@ RSpec.describe 'Attendee Voting Interactions', type: :feature, js: true do
   end
 
   feature 'As an attendee who has joined a live show with a yes-no poll' do
+    include_context "with a live show with a yes-no poll" do
+    end
   end
 end

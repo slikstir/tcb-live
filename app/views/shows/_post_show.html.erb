@@ -15,21 +15,17 @@
     </p>
 
     <% show.links.each do |link| %>
-      <div class="row w-100 mb-2">
-        <div class="col text-center text-uppercase">
-          <%= link_to link.url, target: :_blank, class: 'btn template-btn-choice w-100' do %>
-            <%= link.label %>
-          <% end %>
-        </div>
+      <div class="col text-center text-uppercase mb-3">
+        <%= link_to link.url, target: :_blank, class: 'btn template-btn-choice w-100' do %>
+          <%= link.label %>
+        <% end %>
       </div>
     <% end %>
 
-    <div class="row w-100 mt-auto mb-2">
-      <div class="col text-center">
-        <%= link_to log_out_path, class: 'btn template-btn-log-out w-100' do %>
-         Log Out
-        <% end %>
-      </div>
+    <div class="col text-center mb-2">
+      <%= link_to log_out_path, class: 'btn template-btn-log-out w-100' do %>
+        Log Out
+      <% end %>
     </div>
   </div>
 </div>

@@ -8,26 +8,23 @@
 
   <%= render 'logo', show: show %>
 
-  <div class="container-fluid template-light-page d-flex flex-column fill-remaining align-items-center ">
-    <div class=" col-12 col-sm-9 col-md-6 col-lg-5">
-    <p class="h2 text-center m-5">
-      You're ready for the show!
-    </p>
+  <div class="container-fluid template-light-page d-flex flex-column fill-remaining align-items-center">
+    <div class="col-12 col-sm-9 col-md-6 col-lg-5">
+      <p class="h2 text-center m-5">
+        You're ready for the show!
+      </p>
 
-    <% show.links.each do |link| %>
-      <div class="row w-100 mb-2">
-        <div class="coltext-center">
+      <% show.links.each do |link| %>
+        <div class="col text-center mb-3">
           <%= link_to link.url, target: :_blank, class: 'btn template-btn-choice w-100' do %>
             <%= link.label %>
           <% end %>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <div class="row w-100 mt-auto mb-2">
       <div class="col text-center">
         <%= link_to log_out_path, class: 'btn template-btn-log-out w-100' do %>
-         Log Out
+          Log Out
         <% end %>
       </div>
     </div>
