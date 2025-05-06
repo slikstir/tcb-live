@@ -1,0 +1,9 @@
+services:
+  db:
+    ports: []  # disables "5432:5432" binding
+
+  redis:
+    ports: []  # disables "6379:6379" binding
+
+  selenium:
+    ports: []  # disables "4444:4444" and "5900:5900"
