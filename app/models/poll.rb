@@ -100,7 +100,7 @@ class Poll < ApplicationRecord
   end
 
   def set_defaults
-    self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank?
+    self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank? || self.sort.zero?
   end
 
   def broadcast_page_reload

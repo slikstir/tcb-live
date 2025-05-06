@@ -17,8 +17,7 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(
-      :poll_id, :attendee_id, :choice_id 
+      :poll_id, :attendee_id, :choice_id, :count
     )
   end
-
 end
