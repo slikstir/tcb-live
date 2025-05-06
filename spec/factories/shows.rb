@@ -18,6 +18,10 @@
 #
 FactoryBot.define do
   factory :show do
-    
+    audience_size { 100 }
+    code { 'ABC123' }
+    name { 'Sample Show' }
+    state { 'preshow' }
+    association :template, factory: :template
   end
 end

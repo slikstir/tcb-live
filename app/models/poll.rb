@@ -24,7 +24,8 @@ class Poll < ApplicationRecord
   STATES = %w[closed open].freeze
   KINDS = {
     "multiple_choice" => "Multiple Choice",
-    "yes_no" => "Yes/No"
+    "yes_no" => "Yes/No",
+    "versus" => "Versus Tap Battle"
   }.freeze
 
   scope :open, -> { where(state: "open") }
@@ -59,6 +60,10 @@ class Poll < ApplicationRecord
     define_method("#{key}?") do
       key == kind
     end
+  end
+
+  def humanized_kind
+    KINDS[kind]
   end
 
   def winners

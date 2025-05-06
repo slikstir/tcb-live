@@ -31,6 +31,6 @@
 #
 FactoryBot.define do
   factory :template do
-    
+    name { "Default Template" }
   end
 end

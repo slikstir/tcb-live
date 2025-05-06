@@ -8,7 +8,11 @@
       <%= f.select :state, Poll::STATES %>
     </div>
     <div class="col-sm-2">
-      <%= f.select :kind, Poll::KINDS.map{|x, y| [y, x]} %>
+      <% if @poll.persisted? %>
+        <%= f.text_field :kind, value: @poll.humanized_kind, disabled: true %>
+      <% else %>
+        <%= f.select :kind, Poll::KINDS.map{|x, y| [y, x]} %>
+      <% end %>
     </div>
     <div class="col-sm-2">
       <%= f.file_field :image %>
@@ -48,8 +52,8 @@
         </div>
         <div data-controller="choices" class="mb-5">
           <div id="choices">
-            <%= f.fields_for :choices do |link_form| %>
-              <%= render 'choice_fields', f: link_form %>
+            <%= f.fields_for :choices do |choice_form| %>
+              <%= render 'choice_fields', f: choice_form %>
             <% end %>
           </div>
           <%= button_tag "Add Choice", class: "btn btn-primary btn-sm mt-2 text-end", data: { action: "click->choices#add"} %>

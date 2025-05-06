@@ -40,3 +40,4 @@
 /config/credentials/test.key
 
 .byebug_history
+./*.dump
