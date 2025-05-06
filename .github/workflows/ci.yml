@@ -35,8 +35,8 @@ jobs:
           echo "RAILS_ENV=test" >> $GITHUB_ENV
           echo "SELENIUM_REMOTE_URL=http://selenium:4444/wd/hub" >> $GITHUB_ENV
 
-      - name: Build all containers (including selenium)
-        run: docker compose -f docker-compose.yml up -d --build
+      - name: Build containers for CI
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --build
 
       - name: Wait for Selenium
         run: |
