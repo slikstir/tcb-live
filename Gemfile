@@ -56,7 +56,7 @@ gem "pagy"
 gem "redis", "~> 5.4"
 gem "aws-sdk-s3", require: false
 
-gem "rails_icons", "~> 1.1"
+gem "rails_icons", "~> 1.3"
 gem "rqrcode"
 gem "chunky_png"
 
