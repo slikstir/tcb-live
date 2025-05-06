@@ -3,6 +3,7 @@
 # Table name: choices
 #
 #  id         :bigint           not null, primary key
+#  icon       :string
 #  sort       :string
 #  subtitle   :string
 #  title      :string

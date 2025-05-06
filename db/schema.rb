@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_17_200621) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_06_172745) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -56,6 +57,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_17_200621) do
     t.string "subtitle"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "icon"
     t.index ["poll_id"], name: "index_choices_on_poll_id"
   end
 

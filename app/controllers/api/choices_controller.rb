@@ -51,7 +51,7 @@ module Api
     def choice_params
       params.require(:choice).permit(
         :id, :image, :title, :subtitle, :sort, :remove_image,
-        :force_vote_count
+        :force_vote_count, :icon
       )
     end
 

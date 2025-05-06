@@ -27,7 +27,7 @@
   <div class="col">
     <div class="card">
       <div class="card-header">
-        Title
+        Title/Icon
       </div>
     </div>
   </div>
@@ -72,7 +72,11 @@
     <div class="col">
       <div class="card h-100">
         <div class="card-body">
-          <%= choice.title %>
+          <% if choice.icon.present? %>
+            <%= icon choice.icon %>
+          <% else %>
+            <%= choice.title %>
+          <% end %>
         </div>
       </div>
     </div>

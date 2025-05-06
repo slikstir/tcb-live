@@ -1,6 +1,6 @@
 module Admin
   class PollsController < AdminController
-    before_action :set_poll, only: [:show, :edit, :update, :destroy]
+    before_action :set_poll, only: [ :show, :edit, :update, :destroy ]
     before_action :set_show
 
     def index
@@ -20,8 +20,8 @@ module Admin
       end
     end
 
-    def show; end 
-    
+    def show; end
+
     def edit; end
 
     def update
@@ -38,13 +38,16 @@ module Admin
     end
 
 
-    private 
+    private
 
     def poll_params
       params.require(:poll).permit(
-        :question, :subtitle, :image, :reset_votes, 
-        :sort, :state, :kind, :remove_image, 
-        choices_attributes: [:id, :image, :title, :subtitle, :sort, :remove_image,  :_destroy])
+        :question, :subtitle, :image, :reset_votes,
+        :sort, :state, :kind, :remove_image,
+        choices_attributes: [
+            :id, :image, :title, :subtitle, :sort,
+            :icon, :remove_image, :force_vote_count, :_destroy
+        ])
     end
 
     def set_poll

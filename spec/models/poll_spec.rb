@@ -43,5 +43,16 @@ RSpec.describe Poll, type: :model do
       poll = Poll.new
       expect(poll.sort).to eq(0)
     end
+
+    context 'when kind is multiple_choice' do
+      it 'creates a yes and a no choice by default' do
+        poll = create(:yes_no_poll, show: create(:show))
+        poll.save
+
+        expect(poll.choices.count).to eq(2)
+        expect(poll.choices.pluck(:title)).to include('Yes', 'No')
+        expect(poll.choices.pluck(:icon)).to include('check-circle', 'x-circle')
+      end
+    end
   end
 end

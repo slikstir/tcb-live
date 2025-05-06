@@ -21,9 +21,17 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 FactoryBot.define do
-  factory :multiple_choice_poll, class: Poll do
-    kind { "multiple_choice" }
-    question { "What is your favorite color?" }
-    subtitle { "Choose one" }
+  factory :poll do
+    factory :multiple_choice_poll do
+      kind { "multiple_choice" }
+      question { "What is your favorite color?" }
+      subtitle { "Choose one" }
+    end
+
+    factory :yes_no_poll do
+      kind { "yes_no" }
+      question { "Do you like ice cream?" }
+      subtitle { "Answer yes or no" }
+    end
   end
 end

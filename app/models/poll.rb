@@ -45,6 +45,7 @@ class Poll < ApplicationRecord
   accepts_nested_attributes_for :choices, allow_destroy: true
 
   after_initialize :set_defaults, if: :new_record?
+  after_create :create_default_choices, if: :yes_no?
 
   before_save :purge_image, if: :remove_image?
   before_save :destroy_votes, if: :reset_votes
@@ -85,6 +86,10 @@ class Poll < ApplicationRecord
   end
 
   private
+
+  def create_default_choices
+    choices.create([ { title: "Yes", icon: "check-circle" }, { title: "No", icon: "x-circle" } ])
+  end
 
   def purge_image
     image.purge_later

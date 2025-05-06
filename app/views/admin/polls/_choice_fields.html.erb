@@ -16,6 +16,8 @@
 
   <div class="col">
     <%= f.text_field :title, hide_label: true, required: true %>
+    <%= f.select :icon, BOXICONS, hide_label: true, include_blank: true %>
+    <small class="form-text text-muted"><%= link_to "https://boxicons.com/", "https://boxicons.com/", target: :_blank, data: {turbo: false} %></small>
   </div>
 
   <div class="col">

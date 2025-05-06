@@ -5,7 +5,13 @@
         <div class="col-6 d-flex align-items-center">
           <%= f.radio_button :choice_id, choice.id, class: "visually-hidden", id: "vote_choice_#{choice.id}", required: true %>
           <label for="vote_choice_<%= choice.id %>" class="mb-0 text-center text-white btn template-btn-choice btn-lg w-100 choice-label">
+            <% if choice.icon.present? %>
+              <div class="text-uppercase">
+                <%= icon choice.icon, class: "icon-inherit" %>
+              </div>
+            <% else %>
             <div class="text-uppercase"><%= choice.title %></div>
+            <% end %>
             <% if choice.subtitle.present? %>
               <div class="text-warning text-uppercase small"><%= choice.subtitle %></div>
             <% end %>
