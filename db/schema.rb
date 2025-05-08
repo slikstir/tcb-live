@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_170426) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -126,12 +126,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_170426) do
   end
 
   create_table "show_attendees", force: :cascade do |t|
-    t.bigint "show_id", null: false
+    t.bigint "deprecated_show_id"
     t.bigint "attendee_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "attendable_type"
+    t.bigint "attendable_id"
+    t.index ["attendable_type", "attendable_id"], name: "index_show_attendees_on_attendable"
     t.index ["attendee_id"], name: "index_show_attendees_on_attendee_id"
-    t.index ["show_id"], name: "index_show_attendees_on_show_id"
+    t.index ["deprecated_show_id"], name: "index_show_attendees_on_deprecated_show_id"
   end
 
   create_table "shows", force: :cascade do |t|
@@ -219,7 +222,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_170426) do
   add_foreign_key "live_streams", "shows"
   add_foreign_key "polls", "shows"
   add_foreign_key "show_attendees", "attendees"
-  add_foreign_key "show_attendees", "shows"
+  add_foreign_key "show_attendees", "shows", column: "deprecated_show_id"
   add_foreign_key "votes", "attendees"
   add_foreign_key "votes", "choices"
   add_foreign_key "votes", "live_streams"

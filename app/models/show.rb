@@ -22,7 +22,7 @@ class Show < ApplicationRecord
 
   has_many :links, dependent: :destroy
   has_many :polls, -> { order(sort: :asc) }, dependent: :destroy
-  has_many :show_attendees, dependent: :destroy
+  has_many :show_attendees, as: :attendable, dependent: :destroy
   has_many :attendees, through: :show_attendees
   has_one :live_stream, dependent: :destroy
 

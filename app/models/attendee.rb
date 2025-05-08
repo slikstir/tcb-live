@@ -10,7 +10,9 @@
 #
 class Attendee < ApplicationRecord
   has_many :show_attendees, dependent: :destroy
-  has_many :shows, through: :show_attendees
+  has_many :shows, through: :show_attendees, source: :attendable, source_type: "Show"
+  has_many :live_streams, through: :show_attendees, source: :attendable, source_type: "LiveStream"
+
   has_many :votes, dependent: :destroy
 
   validates :name, :email, presence: true

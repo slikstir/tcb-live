@@ -21,7 +21,7 @@ RSpec.describe Attendee, type: :model do
 
   context 'associations' do
     it { should have_many(:show_attendees).dependent(:destroy) }
-    it { should have_many(:shows).through(:show_attendees) }
+    it { should have_many(:shows).through(:show_attendees).source(:attendable) }
     it { should have_many(:votes).dependent(:destroy) }
   end
 

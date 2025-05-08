@@ -7,7 +7,7 @@ class VotesController < ApplicationController
     @show = @poll.show
 
     if @vote.save
-      redirect_to show_path(@show), notice: "Your vote has been recorded"
+      redirect_to show_path(@show.code), notice: "Your vote has been recorded"
     else
       render "shows/show"
     end

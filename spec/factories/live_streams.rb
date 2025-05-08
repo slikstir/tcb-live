@@ -3,6 +3,7 @@
 # Table name: live_streams
 #
 #  id           :bigint           not null, primary key
+#  code         :string           default(""), not null
 #  description  :string
 #  name         :string
 #  stream_delay :integer          default(0), not null

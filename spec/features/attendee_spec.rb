@@ -16,6 +16,20 @@ RSpec.describe 'Attendee Account Interactions', type: :feature, js: true do
       end
 
       scenario 'Once logged in, I can edit my name and email'
+
+      context 'and the live show has a live stream' do
+        let!(:live_stream) { create(:live_stream, show: show) }
+
+        scenario 'I can visit the homepage and join the show in the preshow via the livestream code' do
+          visit root_path
+          expect(page).to have_content(/get ready to participate in the show!/i)
+          fill_in "Name", with: Faker::Name.name
+          fill_in "Email", with: Faker::Internet.email
+          fill_in "Show code", with: live_stream.code
+          click_button "Join Show"
+          expect(page).to have_content(/you're ready for the show/i)
+        end
+      end
     end
   end
 end

@@ -3,6 +3,7 @@
 # Table name: live_streams
 #
 #  id           :bigint           not null, primary key
+#  code         :string           default(""), not null
 #  description  :string
 #  name         :string
 #  stream_delay :integer          default(0), not null
@@ -22,6 +23,8 @@ class LiveStream < ApplicationRecord
   belongs_to :show
   has_many :live_stream_polls, dependent: :destroy
   has_many :polls, through: :live_stream_polls
+  has_many :show_attendees, as: :attendable
+  has_many :attendees, through: :show_attendees
 
   validates :name, :code, presence: true
   validates :stream_delay,
