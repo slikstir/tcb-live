@@ -57,8 +57,32 @@ RSpec.describe Poll, type: :model do
   end
 
   context '#after_create' do
+    let(:show) { create(:show) }
+    let(:live_stream) { create(:live_stream, show: show) }
+
     context 'when there is a live stream' do
-      it 'creates a live stream poll'
+      it 'creates a live stream poll' do
+        expect(show.polls.count).to eq(0)
+        expect(live_stream.live_stream_polls.count).to eq(0)
+        create(:multiple_choice_poll, show: show)
+        expect(show.polls.count).to eq(1)
+        expect(live_stream.live_stream_polls.count).to eq(1)
+      end
+    end
+  end
+
+  context "#after_delete" do
+    context "when there is a live stream" do
+      include_context "with a live show and two multiple-choice polls"
+      let(:live_stream) { create(:live_stream, show: show) }
+
+      it "deletes the live stream poll" do
+        expect(show.polls.count).to eq(2)
+        expect(live_stream.live_stream_polls.count).to eq(2)
+        show.polls.first.destroy
+        expect(show.polls.count).to eq(1)
+        expect(live_stream.live_stream_polls.count).to eq(1)
+      end
     end
   end
 end

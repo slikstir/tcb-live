@@ -34,6 +34,11 @@ RSpec.describe LiveStream, type: :model do
   end
 
   context 'after_create' do
-    it 'creates live_stream_polls for each poll in the show'
+    include_context "with a live show and two multiple-choice polls"
+    let(:live_stream) { create(:live_stream, show: show) }
+
+    it 'creates live_stream_polls for each poll in the show' do
+      expect(live_stream.live_stream_polls.count).to eq(2)
+    end
   end
 end

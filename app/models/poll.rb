@@ -90,7 +90,7 @@ class Poll < ApplicationRecord
   private
 
   def create_live_stream_poll
-    return unless show.live_streams.any?
+    return if show.live_stream.blank?
 
     show.live_stream.live_stream_polls.create(poll: self, stream_delay: nil)
   end

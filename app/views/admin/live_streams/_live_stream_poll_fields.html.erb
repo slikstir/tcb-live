@@ -1,4 +1,4 @@
-<div class="row pb-2 pt-2">
+<div class="row pb-2 pt-2" id="<%= dom_id(f.object) %>" data-poll-id="<%= f.object.poll.id %>"> 
   <div class="col-6 text-center">
     <%= f.object.poll.humanized_kind %> Question<br>
     <strong><%= f.object.poll.question %></strong>
