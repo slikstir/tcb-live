@@ -5,7 +5,7 @@
 #  id           :bigint           not null, primary key
 #  description  :string
 #  name         :string
-#  stream_delay :integer
+#  stream_delay :integer          default(0), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  show_id      :bigint           not null

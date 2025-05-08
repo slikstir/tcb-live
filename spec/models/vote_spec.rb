@@ -30,5 +30,6 @@ RSpec.describe Vote, type: :model do
     it { should belong_to(:attendee).optional }
     it { should belong_to(:choice) }
     it { should belong_to(:poll) }
+    it { should belong_to(:live_stream).optional }
   end
 end

@@ -1,0 +1,19 @@
+<div class="row pb-2 pt-2">
+  <div class="col-6 text-center">
+    <%= f.object.poll.humanized_kind %> Question<br>
+    <strong><%= f.object.poll.question %></strong>
+    <% if f.object.poll.subtitle.present? %>
+    <br>
+      <small><%= f.object.poll.subtitle %></small>
+    <% end %>
+  </div>
+  <div class="col-3">
+    <%= f.number_field :stream_delay, value: f.object[:stream_delay], class: "form-control", hide_label: true, 
+                append: "seconds" %>
+  </div>
+
+  <div class="col-3">
+    <%= f.select :count_votes, [["No", false], ["Yes", true]], 
+                hide_label: true %>
+  </div>
+</div>

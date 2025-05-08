@@ -27,4 +27,5 @@ class Vote < ApplicationRecord
   belongs_to :attendee, optional: true
   belongs_to :choice
   belongs_to :poll
+  belongs_to :live_stream, optional: true
 end

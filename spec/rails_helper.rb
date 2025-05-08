@@ -74,6 +74,16 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include CapybaraHelpers, type: :feature
+
+  # Include Devise test helpers
+  config.include Warden::Test::Helpers
+  config.before(:suite) do
+    Warden.test_mode!
+  end
+
+  config.after(:each) do
+    Warden.test_reset!
+  end
 end
 
 Shoulda::Matchers.configure do |config|

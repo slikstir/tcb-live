@@ -55,4 +55,10 @@ RSpec.describe Poll, type: :model do
       end
     end
   end
+
+  context '#after_create' do
+    context 'when there is a live stream' do
+      it 'creates a live stream poll'
+    end
+  end
 end

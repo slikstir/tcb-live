@@ -5,7 +5,7 @@
 #  id           :bigint           not null, primary key
 #  description  :string
 #  name         :string
-#  stream_delay :integer
+#  stream_delay :integer          default(0), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  show_id      :bigint           not null
@@ -21,9 +21,22 @@
 class LiveStream < ApplicationRecord
   belongs_to :show
   has_many :live_stream_polls, dependent: :destroy
+  has_many :polls, through: :live_stream_polls
 
-  validates :name, presence: true
-  validates :stream_delay, 
-              numericality: { only_integer: true, greater_than: 0 }, 
-              allow_nil: false  
+  validates :name, :code, presence: true
+  validates :stream_delay,
+              numericality: { only_integer: true, greater_than: 0 },
+              allow_nil: false
+
+  after_create :assign_live_stream_polls
+
+  accepts_nested_attributes_for :live_stream_polls
+
+  private
+
+  def assign_live_stream_polls
+    show.polls.each do |poll|
+      live_stream_polls.create(poll: poll, stream_delay: nil)
+    end
+  end
 end

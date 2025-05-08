@@ -14,6 +14,7 @@ Rails.application.routes.draw do
          get :attendees, to: "shows#attendees", as: :attendees
       end
       resources :polls
+      resources :live_streams, except: [ :index ]
     end
     resources :settings, only: [ :index, :show, :edit, :update ]
     resources :users

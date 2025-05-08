@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_07_140132) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_170426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -98,6 +98,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_140132) do
     t.bigint "show_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code", default: "", null: false
     t.index ["show_id"], name: "index_live_streams_on_show_id"
   end
 
@@ -202,8 +203,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_140132) do
     t.datetime "updated_at", null: false
     t.integer "count", default: 1, null: false
     t.boolean "eligible", default: true
+    t.bigint "live_stream_id"
     t.index ["attendee_id"], name: "index_votes_on_attendee_id"
     t.index ["choice_id"], name: "index_votes_on_choice_id"
+    t.index ["live_stream_id"], name: "index_votes_on_live_stream_id"
     t.index ["poll_id"], name: "index_votes_on_poll_id"
   end
 
@@ -219,5 +222,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_140132) do
   add_foreign_key "show_attendees", "shows"
   add_foreign_key "votes", "attendees"
   add_foreign_key "votes", "choices"
+  add_foreign_key "votes", "live_streams"
   add_foreign_key "votes", "polls"
 end

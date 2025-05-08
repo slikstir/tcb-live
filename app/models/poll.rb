@@ -34,7 +34,7 @@ class Poll < ApplicationRecord
 
   belongs_to :show
   has_many :choices, -> { order(sort: :asc) }, dependent: :destroy
-  has_many  :votes, dependent: :destroy
+  has_many :votes, dependent: :destroy
   has_one :live_stream_poll, dependent: :destroy
 
   validates :kind, inclusion: { in: KINDS.keys }
@@ -47,6 +47,7 @@ class Poll < ApplicationRecord
 
   after_initialize :set_defaults, if: :new_record?
   after_create :create_default_choices, if: :yes_no?
+  after_create :create_live_stream_poll
 
   before_save :purge_image, if: :remove_image?
   before_save :destroy_votes, if: :reset_votes
@@ -87,6 +88,12 @@ class Poll < ApplicationRecord
   end
 
   private
+
+  def create_live_stream_poll
+    return unless show.live_streams.any?
+
+    show.live_stream.live_stream_polls.create(poll: self, stream_delay: nil)
+  end
 
   def create_default_choices
     choices.create([ { title: "Yes", icon: "check-circle" }, { title: "No", icon: "x-circle" } ])
