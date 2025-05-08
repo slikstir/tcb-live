@@ -35,6 +35,7 @@ class Poll < ApplicationRecord
   belongs_to :show
   has_many :choices, -> { order(sort: :asc) }, dependent: :destroy
   has_many  :votes, dependent: :destroy
+  has_one :live_stream_poll, dependent: :destroy
 
   validates :kind, inclusion: { in: KINDS.keys }
   validates :state, inclusion: { in: STATES }
@@ -100,7 +101,11 @@ class Poll < ApplicationRecord
   end
 
   def set_defaults
-    self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank? || self.sort.zero?
+    if show.blank?
+      1
+    else
+      self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank? || self.sort.zero?
+    end
   end
 
   def broadcast_page_reload

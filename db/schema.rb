@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_06_191720) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_140132) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -78,6 +78,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_191720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["show_id"], name: "index_links_on_show_id"
+  end
+
+  create_table "live_stream_polls", force: :cascade do |t|
+    t.bigint "live_stream_id", null: false
+    t.bigint "poll_id", null: false
+    t.string "stream_delay"
+    t.boolean "count_votes", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["live_stream_id"], name: "index_live_stream_polls_on_live_stream_id"
+    t.index ["poll_id"], name: "index_live_stream_polls_on_poll_id"
+  end
+
+  create_table "live_streams", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "stream_delay", default: 0, null: false
+    t.bigint "show_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["show_id"], name: "index_live_streams_on_show_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -180,6 +201,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_191720) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "count", default: 1, null: false
+    t.boolean "eligible", default: true
     t.index ["attendee_id"], name: "index_votes_on_attendee_id"
     t.index ["choice_id"], name: "index_votes_on_choice_id"
     t.index ["poll_id"], name: "index_votes_on_poll_id"
@@ -189,6 +211,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_191720) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "choices", "polls"
   add_foreign_key "links", "shows"
+  add_foreign_key "live_stream_polls", "live_streams"
+  add_foreign_key "live_stream_polls", "polls"
+  add_foreign_key "live_streams", "shows"
   add_foreign_key "polls", "shows"
   add_foreign_key "show_attendees", "attendees"
   add_foreign_key "show_attendees", "shows"

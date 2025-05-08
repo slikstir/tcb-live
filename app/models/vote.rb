@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  count       :integer          default(1), not null
+#  eligible    :boolean          default(TRUE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  attendee_id :bigint
