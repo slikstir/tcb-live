@@ -18,3 +18,9 @@ RSpec.shared_context "with a live show with a yes-no poll" do
   let!(:p1c1) { p1.choices.first }
   let!(:p1c2) { p1.choices.last }
 end
+
+RSpec.shared_context 'with a live stream and two multiple-choice polls' do
+  include_context 'with a live show and two multiple-choice polls'
+
+  let(:live_stream) { create(:live_stream, show: show, code: "twitchStream") }
+end

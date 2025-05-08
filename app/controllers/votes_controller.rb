@@ -7,7 +7,11 @@ class VotesController < ApplicationController
     @show = @poll.show
 
     if @vote.save
-      redirect_to show_path(@show.code), notice: "Your vote has been recorded"
+      if @poll.live_stream_poll.present?
+        redirect_to show_path(@show.live_stream.code), notice: "Your vote has been recorded"
+      else
+        redirect_to show_path(@show.code), notice: "Your vote has been recorded"
+      end
     else
       render "shows/show"
     end
@@ -17,7 +21,8 @@ class VotesController < ApplicationController
 
   def vote_params
     params.require(:vote).permit(
-      :poll_id, :attendee_id, :choice_id, :count
+      :poll_id, :attendee_id, :choice_id, :count,
+      :eligible, :live_stream_poll_id
     )
   end
 end

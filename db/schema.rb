@@ -206,10 +206,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
     t.datetime "updated_at", null: false
     t.integer "count", default: 1, null: false
     t.boolean "eligible", default: true
-    t.bigint "live_stream_id"
+    t.bigint "live_stream_poll_id"
     t.index ["attendee_id"], name: "index_votes_on_attendee_id"
     t.index ["choice_id"], name: "index_votes_on_choice_id"
-    t.index ["live_stream_id"], name: "index_votes_on_live_stream_id"
+    t.index ["live_stream_poll_id"], name: "index_votes_on_live_stream_poll_id"
     t.index ["poll_id"], name: "index_votes_on_poll_id"
   end
 
@@ -225,6 +225,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
   add_foreign_key "show_attendees", "shows", column: "deprecated_show_id"
   add_foreign_key "votes", "attendees"
   add_foreign_key "votes", "choices"
-  add_foreign_key "votes", "live_streams"
   add_foreign_key "votes", "polls"
 end

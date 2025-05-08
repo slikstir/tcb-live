@@ -12,14 +12,16 @@ class AttendeesController < ApplicationController
     if live_stream.present?
       # Associate the attendee with the LiveStream and redirect to its parent Show
       live_stream.attendees << @attendee unless live_stream.attendees.exists?(id: @attendee.id)
-      session[:show_code] = permitted_params[:show_code].downcase
-      redirect_to show_path(live_stream.show.code), notice: "You're in! Sit back and get ready for the show"
+      session[:live_stream_code] = live_stream.code.downcase
+      session[:show_code] = live_stream.show.code.downcase
+      redirect_to show_path(live_stream.code), notice: "You're in! Sit back and get ready for the show"
     elsif show.present?
       if !(show.live? || show.preshow?)
         redirect_to root_path, alert: "Sorry, but that show isn't live"
       else
         show.attendees << @attendee unless show.attendees.exists?(id: @attendee.id)
-        session[:show_code] = permitted_params[:show_code].downcase
+        session[:live_stream_code] = nil
+        session[:show_code] = show.code.downcase
         redirect_to show_path(show.code), notice: "You're in! Sit back and get ready for the show"
       end
     else

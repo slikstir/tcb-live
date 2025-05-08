@@ -38,9 +38,17 @@
       </p>
     <% else %>
       <%= render 'shared/record_errors', record: @vote %>
-
+        <% if @live_stream.present? %>
+          <div id="<%= dom_id(@live_stream) %>"></div>
+        <% else %>
+          <div id="<%= dom_id(@show) %>"></div>
+        <% end %>
       <!-- vote form -->
       <%= form_with model: @vote, local: true, class: "poll-form col-12 col-sm-9 col-md-6 col-lg-4 px-2" do |f| %>
+        <% if @live_stream.present? %>
+          <%= f.hidden_field :eligible, value: @poll.live_stream_poll.count_votes? %>
+          <%= f.hidden_field :live_stream_poll_id, value: @poll.live_stream_poll.try(:id) %>
+        <% end %>
         <%= f.hidden_field :attendee_id, value: @current_attendee.id %>
         <%= f.hidden_field :poll_id, value: @poll.id %>
 

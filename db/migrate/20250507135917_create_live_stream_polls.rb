@@ -7,5 +7,9 @@ class CreateLiveStreamPolls < ActiveRecord::Migration[8.0]
       t.boolean :count_votes, default: false
       t.timestamps
     end
+
+    Poll.all.each do |poll|
+      poll.send :create_live_stream_poll
+    end
   end
 end
