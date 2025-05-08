@@ -3,7 +3,6 @@
 # Table name: votes
 #
 #  id          :bigint           not null, primary key
-#  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  attendee_id :bigint
@@ -26,4 +25,8 @@ class Vote < ApplicationRecord
   belongs_to :attendee, optional: true
   belongs_to :choice
   belongs_to :poll
+  belongs_to :live_stream_poll, optional: true
+
+  scope :eligible, -> { where(eligible: true) }
+  scope :ineligible, -> { where(eligible: false) }
 end

@@ -34,7 +34,8 @@ class Poll < ApplicationRecord
 
   belongs_to :show
   has_many :choices, -> { order(sort: :asc) }, dependent: :destroy
-  has_many  :votes, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_one :live_stream_poll, dependent: :destroy
 
   validates :kind, inclusion: { in: KINDS.keys }
   validates :state, inclusion: { in: STATES }
@@ -46,6 +47,7 @@ class Poll < ApplicationRecord
 
   after_initialize :set_defaults, if: :new_record?
   after_create :create_default_choices, if: :yes_no?
+  after_create :create_live_stream_poll
 
   before_save :purge_image, if: :remove_image?
   before_save :destroy_votes, if: :reset_votes
@@ -68,8 +70,8 @@ class Poll < ApplicationRecord
   end
 
   def winners
-    max_votes = choices.map { |choice| choice.votes.sum(&:count) }.max
-    choices.select { |choice| choice.votes.sum(&:count) == max_votes }
+    max_votes = choices.map { |choice| choice.votes_count }.max
+    choices.select { |choice| choice.votes_count == max_votes }
   end
 
   def as_json(options = {})
@@ -87,6 +89,12 @@ class Poll < ApplicationRecord
 
   private
 
+  def create_live_stream_poll
+    return if show.live_stream.blank?
+
+    show.live_stream.live_stream_polls.create(poll: self, stream_delay: nil) unless show.live_stream.live_stream_polls.exists?(poll: self)
+  end
+
   def create_default_choices
     choices.create([ { title: "Yes", icon: "check-circle" }, { title: "No", icon: "x-circle" } ])
   end
@@ -100,7 +108,11 @@ class Poll < ApplicationRecord
   end
 
   def set_defaults
-    self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank? || self.sort.zero?
+    if show.blank?
+      1
+    else
+      self.sort = show.polls.maximum(:sort).to_i + 1 if self.sort.blank? || self.sort.zero?
+    end
   end
 
   def broadcast_page_reload

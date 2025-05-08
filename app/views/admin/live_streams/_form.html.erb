@@ -1,0 +1,32 @@
+<%= render 'admin/shared/record_errors', record: @live_stream %>
+
+<%= bootstrap_form_with model: [:admin, @show, @live_stream], multipart: true do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :code %>
+  <%= f.text_field :description %>
+  <%= f.number_field :stream_delay, step: 1, min: 0 %>
+  <%= f.hidden_field :show_id %>
+
+  <% if @live_stream.persisted? %>
+    <div class="row">
+      <div class="col-6 text-center">
+        <strong>Poll</strong>
+      </div>
+      <div class="col-3 text-center">
+        <strong>Stream Delay</strong><br>
+        <small>Leaving blank will default to the live streams delay</small>
+      </div>
+      <div class="col-3 text-center">
+        <strong>Count Votes?</strong><br>
+        <small>Counting votes will allow participants to vote and affect the outcome</small>
+      </div>
+    </div>
+     <div class="live-stream-poll-fields-container mb-5">
+      <%= f.fields_for :live_stream_polls do |pf| %>
+        <%= render 'live_stream_poll_fields', f: pf %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= f.submit class: "btn btn-success btn-lg mb-5 w-100" %>
+<% end %>

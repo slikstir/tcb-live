@@ -39,7 +39,7 @@ class Choice < ApplicationRecord
   attribute :force_vote_count, :integer
 
   def votes_count
-    votes.sum(&:count)
+    votes.eligible.sum(&:count)
   end
 
   def as_json(options = {})

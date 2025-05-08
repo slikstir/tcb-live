@@ -1,0 +1,105 @@
+  <div class="row">
+    <div class="col-sm-1">
+      <div class="card">
+        <div class="card-header">
+          Order
+        </div>
+        <div class="card-body text-center">
+          <%= poll.sort %>
+        </div>
+      </div>
+    </div>
+    <% if results %>
+      <div class="col-sm-1">
+        <div class="card h-100">
+          <div class="card-header">
+            Winner
+          </div>
+          <div class="card-body text-center bg-success text-light">
+            <% if poll.votes.any? %>
+              <strong><%= poll.winners.map(&:sort).join(", ") %></strong><br>
+              <%= link_to admin_show_poll_path(@show, poll, poll: {reset_votes: :true}), 
+                  method: :patch,
+                  data: {confirm: "Are you sure you want to reset the poll?"} do %>
+                <%= icon 'reset', class: 'icon-text-white' %>
+              <% end %>
+            <% else %>
+              <strong>No votes</strong>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="col-sm-1">
+      <div class="card">
+        <div class="card-header">
+          Delay
+        </div>
+        <div class="card-body text-center">
+          <%= live_stream_poll.stream_delay %>s
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1">
+      <div class="card">
+        <div class="card-header">
+          State
+        </div>
+        <div class="card-body text-center">
+          <%= poll.state %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="card">
+        <div class="card-header">
+          Count Votes?
+        </div>
+        <div class="card-body text-center">
+          <%= yes_no_bool live_stream_poll.count_votes? %>
+        </div>
+      </div>
+    </div>
+    <% if poll.image.attached? %>
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            Image
+          </div>
+          <div class="card-body text-center">
+              <%= image_tag rails_public_blob_url(poll.image), class: "img-fluid mb-3", style: "" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          
+          <%= poll.humanized_kind %> Question
+        </div>
+        <div class="card-body text-center">
+          <%= poll.question %><br>
+          <% if poll.subtitle.present? %>
+            <small><%= poll.subtitle %></small>
+          <% end %>        
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%= render 'admin/live_streams/choices', poll: poll, results: results %>
+
+  <% unless results %>
+    <div class="row">
+      <div class="col text-end">
+        <%= link_to edit_admin_show_poll_path(@show, poll), class: "btn btn-warning btn-sm" do  %>
+          Edit
+        <% end %>
+
+        <%= link_to admin_show_poll_path(@show, poll), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to remove this poll?"} do  %>
+          Remove?
+        <% end %>
+      </div>
+    </div>
+  <% end %>

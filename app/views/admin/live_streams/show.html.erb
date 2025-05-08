@@ -1,0 +1,86 @@
+
+  <%= render 'admin/shows/nav' %>
+
+  <div class="d-flex justify-content-between align-items-center mb-3" id="live-stream-header">
+    <h1 class="mb-0">
+      <%= @show.name %> Live Stream: <%= @live_stream.name %>
+    </h1>
+    <small>
+      <%= link_to edit_admin_show_live_stream_path(@show, @live_stream), class: "btn btn-warning btn-sm" do  %>
+        <%= icon "pencil", style: "height: 1.5em;" %> Edit
+      <% end %>
+    </small>
+  </div>
+
+  <div class="show-cards">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Live Stream Name
+          </div>
+          <div class="card-body">
+            <%= @live_stream.name %>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Live Stream Description
+          </div>
+          <div class="card-body">
+            <%= @live_stream.description %>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Default Delay
+          </div>
+          <div class="card-body">
+            <%= @live_stream.stream_delay %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Code
+          </div>
+          <div class="card-body">
+            <%= @live_stream.code %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Show Status
+          </div>
+          <div class="card-body">
+            <%= @show.state %>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card">
+          <div class="card-header">
+            Audience
+          </div>
+          <div class="card-body">
+            Expected: <%= @show.audience_size %><br>
+            Online: <%= @live_stream.attendees_count %><br>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <% @live_stream.live_stream_polls.each do |lsp| %>
+      <%= render 'admin/live_streams/poll', live_stream_poll: lsp, poll: lsp.poll, results: true %>
+    <% end %>
+  </div>

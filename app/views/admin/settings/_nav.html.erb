@@ -5,7 +5,7 @@
         <% if @setting.present? && @setting.persisted? %>
           <%= link_to "#{@setting.name} (#{@setting.code})", admin_setting_path(@setting),  class: 'navbar-brand' %>
         <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSubNav" aria-controls="navbarSubNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSubNav">

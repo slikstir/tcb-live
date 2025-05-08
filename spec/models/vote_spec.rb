@@ -3,7 +3,6 @@
 # Table name: votes
 #
 #  id          :bigint           not null, primary key
-#  count       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  attendee_id :bigint
@@ -29,5 +28,6 @@ RSpec.describe Vote, type: :model do
     it { should belong_to(:attendee).optional }
     it { should belong_to(:choice) }
     it { should belong_to(:poll) }
+    it { should belong_to(:live_stream_poll).optional }
   end
 end

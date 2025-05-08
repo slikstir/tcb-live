@@ -19,6 +19,6 @@
 #  fk_rails_...  (show_id => shows.id)
 #
 class ShowAttendee < ApplicationRecord
-  belongs_to :show
   belongs_to :attendee
+  belongs_to :attendable, polymorphic: true
 end

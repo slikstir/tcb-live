@@ -5,7 +5,7 @@
         <% if @show.present? && @show.persisted? %>
           <%= link_to "##{@show.id} -  #{@show.name}", admin_show_path(@show),  class: 'navbar-brand' %>
         <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSubNav" aria-controls="navbarSubNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSubNav">
@@ -16,6 +16,13 @@
               </li>
               <li class="nav-item">
                 <%= link_to "Polls", admin_show_polls_path(@show), class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <% if@show.present? && @show.persisted? && @show.live_stream.present? && @show.live_stream.persisted? %>
+                  <%= link_to "Live Stream", admin_show_live_stream_path(@show, @show.live_stream), class: "nav-link" %>
+                <% elsif @show.present? && @show.persisted?  %>
+                  <%= link_to "Add Live Stream", new_admin_show_live_stream_path(@show), class: "nav-link" %>
+                <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to "Attendees", attendees_admin_show_path(@show), class: "nav-link" %>

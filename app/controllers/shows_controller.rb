@@ -1,10 +1,17 @@
 class ShowsController < ApplicationController
   before_action :check_for_attendee_logged_in
-  before_action :check_if_attendee_part_of_show
   before_action :find_settings
 
   def show
-    @show = Show.find(params[:id])
+    if find_show.blank?
+      redirect_to root_path, alert: "Sorry, but a show with that code wasn't found"
+      return
+    end
+
+    unless attendee_part_of_show?
+      redirect_to root_path, alert: "Please log in with the provided show code"
+      return
+    end
 
     if @show.live? && @show.active_polls?
       # Find the first open poll that
@@ -19,9 +26,25 @@ class ShowsController < ApplicationController
 
   private
 
-  def check_if_attendee_part_of_show
-    unless @current_attendee.shows.include?(Show.find(params[:id]))
-      redirect_to root_path, alert: "Please log in with the provided show code"
+  def find_show
+    @live_stream = LiveStream.find_by("LOWER(code) = ?", params[:code].downcase)
+    if @live_stream.present?
+      @show = @live_stream.show
+    else
+      @show = Show.find_by("LOWER(code) = ?", params[:code].downcase)
+    end
+
+    @show
+  end
+
+  def attendee_part_of_show?
+    @show ||= find_show
+
+    if (@show.present? && @show.attendees.include?(@current_attendee)) ||
+        (@show.live_stream.present? && @show.live_stream.attendees.include?(@current_attendee))
+      true
+    else
+      false
     end
   end
 end

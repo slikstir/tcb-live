@@ -145,3 +145,12 @@ form, input, select {
     border-bottom: solid 1px rgb(222, 226, 230);
   }
 }
+
+.live-stream-poll-fields-container .row:nth-of-type(odd) {
+  background-color: #f8f9fa; /* Light Bootstrap gray */
+}
+
+.live-stream-poll-fields-container .row:nth-of-type(even) {
+  background-color: #e9ecef; /* Slightly darker Bootstrap gray */
+}
+

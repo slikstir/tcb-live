@@ -23,6 +23,24 @@ require 'rails_helper'
 RSpec.describe ShowAttendee, type: :model do
   context 'associations' do
     it { should belong_to(:attendee) }
-    it { should belong_to(:show) }
+    it { should belong_to(:attendable) }
+
+    context 'polymorphic association' do
+      it 'can belong to a Show' do
+        show = create(:show)
+        attendee = create(:attendee)
+        show_attendee = create(:show_attendee, attendee: attendee, attendable: show)
+
+        expect(show_attendee.attendable).to eq(show)
+      end
+
+      it 'can belong to a LiveStream' do
+        live_stream = create(:live_stream, show: create(:show))
+        attendee = create(:attendee)
+        show_attendee = create(:show_attendee, attendee: attendee, attendable: live_stream)
+
+        expect(show_attendee.attendable).to eq(live_stream)
+      end
+    end
   end
 end
