@@ -36,6 +36,10 @@ class LiveStream < ApplicationRecord
 
   accepts_nested_attributes_for :live_stream_polls
 
+  def attendees_count
+    show_attendees.count
+  end
+
   private
 
   def assign_live_stream_polls
