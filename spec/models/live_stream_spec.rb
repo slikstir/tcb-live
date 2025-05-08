@@ -27,10 +27,29 @@ RSpec.describe LiveStream, type: :model do
   end
 
   context 'validations' do
+    let!(:show) { create(:show, code: 'XYZ789') }
+    let!(:existing_live_stream) { create(:live_stream, show: show, code: 'GHI101') }
+
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:code) }
 
-    it 'validates the uniqueness of code across both live streams AND shows'
+
+    it 'is invalid if the code is taken by another LiveStream' do
+      live_stream = build(:live_stream, show: show, code: 'GHI101')
+      expect(live_stream).not_to be_valid
+      expect(live_stream.errors[:code]).to include('has already been taken in LiveStream')
+    end
+
+    it 'is invalid if the code is taken by a Show' do
+      live_stream = build(:live_stream, show: show, code: 'XYZ789')
+      expect(live_stream).not_to be_valid
+      expect(live_stream.errors[:code]).to include('has already been taken in Show')
+    end
+
+    it 'is valid if the code is unique across both models' do
+      live_stream = build(:live_stream, show: show, code: 'JKL202')
+      expect(live_stream).to be_valid
+    end
   end
 
   context 'after_create' do

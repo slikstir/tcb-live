@@ -32,6 +32,7 @@ class Show < ApplicationRecord
   after_save :broadcast_page_reload, if: :saved_change_to_state?
 
   validates :name, presence: true
+  validates :code, unique_across_models: { models: [ LiveStream ] }
 
   STATES = %w[closed preshow live postshow archived].freeze
 

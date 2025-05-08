@@ -25,8 +25,9 @@ class LiveStream < ApplicationRecord
 
   validates :name, :code, presence: true
   validates :stream_delay,
-              numericality: { only_integer: true, greater_than: 0 },
+              numericality: { only_integer: true, greater_than_or_equal_to: 0 },
               allow_nil: false
+  validates :code, unique_across_models: { models: [ Show ] }
 
   after_create :assign_live_stream_polls
 

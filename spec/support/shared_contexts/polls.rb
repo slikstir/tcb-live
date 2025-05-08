@@ -10,3 +10,11 @@ RSpec.shared_context "with a live show and two multiple-choice polls" do
   let!(:p2c2) { create(:choice, poll: p2, title: "Velociraptor") }
   let!(:p2c3) { create(:choice, poll: p2, title: "Reptar") }
 end
+
+
+RSpec.shared_context "with a live show with a yes-no poll" do
+  let!(:show) { create(:show, state: 'live') }
+  let!(:p1) { create(:yes_no_poll, show: show, state: 'open', sort: 1) }
+  let!(:p1c1) { p1.choices.first }
+  let!(:p1c2) { p1.choices.last }
+end
