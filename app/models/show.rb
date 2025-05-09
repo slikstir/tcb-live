@@ -30,6 +30,8 @@ class Show < ApplicationRecord
 
   before_save :destroy_votes, if: :reset_votes
   after_save :broadcast_page_reload, if: :saved_change_to_state?
+  after_update_commit :schedule_live_stream_state_update, if: :saved_change_to_state?
+
 
   validates :name, presence: true
   validates :code, unique_across_models: { models: [ LiveStream ] }
@@ -69,6 +71,14 @@ class Show < ApplicationRecord
 
   def destroy_votes
     polls.each { |p| p.votes.destroy_all }
+  end
+
+
+  def schedule_live_stream_state_update
+    return unless live_stream.present?
+
+    delay = live_stream.stream_delay.seconds
+    UpdateLiveStreamStateJob.set(wait: delay).perform_later(live_stream, state)
   end
 
   def broadcast_page_reload

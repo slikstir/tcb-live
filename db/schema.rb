@@ -95,7 +95,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_145101) do
   create_table "live_streams", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.integer "stream_delay", default: 0, null: false
+    t.integer "stream_delay"
     t.bigint "show_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

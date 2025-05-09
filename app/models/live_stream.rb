@@ -6,7 +6,8 @@
 #  code         :string           default(""), not null
 #  description  :string
 #  name         :string
-#  stream_delay :integer          default(0), not null
+#  state        :string
+#  stream_delay :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  show_id      :bigint           not null

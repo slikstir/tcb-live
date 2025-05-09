@@ -53,6 +53,7 @@ class Poll < ApplicationRecord
   before_save :destroy_votes, if: :reset_votes
 
   after_save :broadcast_page_reload, if: :saved_change_to_state?
+  after_update_commit :schedule_live_stream_poll_state_update, if: :saved_change_to_state?
 
   before_destroy :purge_image
 
@@ -93,6 +94,13 @@ class Poll < ApplicationRecord
     return if show.live_stream.blank?
 
     show.live_stream.live_stream_polls.create(poll: self, stream_delay: nil) unless show.live_stream.live_stream_polls.exists?(poll: self)
+  end
+
+  def schedule_live_stream_poll_state_update
+    return unless live_stream_poll.present? && live_stream_poll.stream_delay.present?
+
+    delay = live_stream_poll.stream_delay.seconds
+    UpdateLiveStreamPollStateJob.set(wait: delay).perform_later(live_stream_poll, state)
   end
 
   def create_default_choices

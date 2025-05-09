@@ -4,6 +4,7 @@
 #
 #  id             :bigint           not null, primary key
 #  count_votes    :boolean          default(FALSE)
+#  state          :string
 #  stream_delay   :string
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
