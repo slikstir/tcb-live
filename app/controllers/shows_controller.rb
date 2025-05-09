@@ -18,8 +18,8 @@ class ShowsController < ApplicationController
       # is not already voted by the attendee
       # Or the last poll if all polls are voted
       if @live_stream.present?
-        @poll = @live_stream.live_stream_polls.open.where.not(id: @current_attendee.votes.pluck(:live_stream_poll_id)).first.poll ||
-                          @live_stream.live_stream_polls.open.last.poll
+        @poll = @live_stream.live_stream_polls.open.where.not(id: @current_attendee.votes.pluck(:live_stream_poll_id)).first.try(:poll) ||
+                          @live_stream.live_stream_polls.open.last.try(:poll)
       else
         @poll = @show.polls.open.where.not(id: @current_attendee.votes.pluck(:poll_id)).first || @show.polls.open.last
       end

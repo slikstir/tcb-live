@@ -24,6 +24,7 @@ ENV BUNDLE_PATH=/bundle \
 # Copy Gemfiles and install gems (caching layer)
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
+RUN bundle exec rails log:clear
 
 # Copy the app
 COPY . .

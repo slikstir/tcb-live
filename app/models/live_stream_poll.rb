@@ -47,7 +47,11 @@ class LiveStreamPoll < ApplicationRecord
   private
 
   def set_defaults
-    self.state = "closed"
+    if self.poll.present?
+      self.state = poll.state
+    else
+      self.state = "closed"
+    end
   end
 
   def broadcast_page_reload

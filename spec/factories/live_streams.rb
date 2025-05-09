@@ -24,6 +24,6 @@ FactoryBot.define do
   factory :live_stream do
     name { "Hella Awesome Twitch Stream" }
     code { "twitch" }
-    stream_delay { 10 }
+    stream_delay { 1 }
   end
 end

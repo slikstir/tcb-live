@@ -1,6 +1,10 @@
 require 'rails_helper'
+require 'active_support/testing/time_helpers'
 
 RSpec.describe 'Attendee Voting Interactions', type: :feature, js: true do
+  include ActiveSupport::Testing::TimeHelpers
+  include ActiveJob::TestHelper
+  
   let(:email) { Faker::Internet.email }
   feature 'As an attendee who has joined a live show with two multiple-choice polls' do
     include_context "with a live show and two multiple-choice polls"
@@ -54,6 +58,8 @@ RSpec.describe 'Attendee Voting Interactions', type: :feature, js: true do
 
           scenario 'the votes are not counted for the show' do
             p2.update(state: 'open')
+            p2.live_stream_poll.update(state: 'open')
+
             sign_in_as_attendee(email: email, show_code: live_stream.code)
             expect(page).to have_css("#live_stream_#{live_stream.id}", visible: :all)
             expect(page).to have_case_insensitive_content(p1.question)
