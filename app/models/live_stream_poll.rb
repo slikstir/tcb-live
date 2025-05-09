@@ -24,13 +24,17 @@ class LiveStreamPoll < ApplicationRecord
   STATES = %w[closed open].freeze
 
   validates :state, inclusion: { in: STATES }
-  
+
   belongs_to :live_stream
   belongs_to :poll
 
+
+  default_scope { joins(:poll).order("polls.sort ASC") }
+  scope :open, -> { where(state: "open") }
+
   after_initialize :set_defaults, if: :new_record?
   after_save :broadcast_page_reload, if: :saved_change_to_state?
-  
+
   def stream_delay
     if self[:stream_delay].present?
       self[:stream_delay].to_i
@@ -42,7 +46,7 @@ class LiveStreamPoll < ApplicationRecord
   private
 
   def set_defaults
-    self.state = 'closed'
+    self.state = "closed"
   end
 
   def broadcast_page_reload
@@ -52,5 +56,4 @@ class LiveStreamPoll < ApplicationRecord
       partial: "shared/reload"
     )
   end
-
 end

@@ -1,16 +1,38 @@
 <%= render 'admin/shared/record_errors', record: @live_stream %>
 
 <%= bootstrap_form_with model: [:admin, @show, @live_stream], multipart: true do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_field :code %>
-  <%= f.text_field :description %>
-  <%= f.number_field :stream_delay, step: 1, min: 0 %>
+  <div class="row">
+    <div class="col-5">
+      <%= f.text_field :name %>
+    </div>
+    <div class="col-2">
+      <%= f.select :state, LiveStream::STATES %>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :code %>
+    </div>
+    <div class="col-2">
+      <%= f.number_field :stream_delay, step: 1, min: 0 %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-9">
+      <%= f.text_field :description %>
+    </div>
+    <div class="col-3">
+      <%= f.text_field :code %>
+    </div>
+  </div>
   <%= f.hidden_field :show_id %>
 
   <% if @live_stream.persisted? %>
     <div class="row">
-      <div class="col-6 text-center">
+      <div class="col-4 text-center">
         <strong>Poll</strong>
+      </div>
+      <div class="col-2 text-center">
+        <strong>State</strong><br>
+        <small>Changes in the state of the poll will trigger changes in the state of the live stream poll</small>
       </div>
       <div class="col-3 text-center">
         <strong>Stream Delay</strong><br>

@@ -42,8 +42,8 @@ module Admin
 
     def live_stream_params
       params.require(:live_stream).permit(
-          :name, :description, :stream_delay, :show_id, :code,
-          live_stream_polls_attributes: [ :id, :poll_id, :stream_delay, :count_votes ]
+          :name, :description, :stream_delay, :show_id, :code, :state,
+          live_stream_polls_attributes: [ :id, :poll_id, :stream_delay, :count_votes, :state ]
       )
     end
 

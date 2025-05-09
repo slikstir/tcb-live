@@ -17,7 +17,12 @@ class ShowsController < ApplicationController
       # Find the first open poll that
       # is not already voted by the attendee
       # Or the last poll if all polls are voted
-      @poll = @show.polls.open.where.not(id: @current_attendee.votes.pluck(:poll_id)).first || @show.polls.open.last
+      if @live_stream.present?
+        @poll = @live_stream.live_stream_polls.open.where.not(id: @current_attendee.votes.pluck(:live_stream_poll_id)).first.poll ||
+                          @live_stream.live_stream_polls.open.last.poll
+      else
+        @poll = @show.polls.open.where.not(id: @current_attendee.votes.pluck(:poll_id)).first || @show.polls.open.last
+      end
       @vote = Vote.new
     end
 
