@@ -32,10 +32,20 @@ class LiveStream < ApplicationRecord
               allow_nil: false
   validates :code, unique_across_models: { models: [ Show ] }
 
+  STATES = %w[closed preshow live postshow archived].freeze
+
   after_create :assign_live_stream_polls
+
+  after_save :broadcast_page_reload, if: :saved_change_to_state?
 
   accepts_nested_attributes_for :live_stream_polls
 
+  STATES.each do |state_name|
+    define_method("#{state_name}?") do
+      state == state_name
+    end
+  end
+  
   def attendees_count
     show_attendees.count
   end
@@ -46,5 +56,13 @@ class LiveStream < ApplicationRecord
     show.polls.each do |poll|
       live_stream_polls.create(poll: poll, stream_delay: nil)
     end
+  end
+
+  def broadcast_page_reload
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "live_stream_page_reload",
+      target: "live_stream_page_reload",
+      partial: "shared/reload"
+    )
   end
 end

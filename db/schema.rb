@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_09_145101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -87,6 +87,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
     t.boolean "count_votes", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["live_stream_id"], name: "index_live_stream_polls_on_live_stream_id"
     t.index ["poll_id"], name: "index_live_stream_polls_on_poll_id"
   end
@@ -99,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_190735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "code", default: "", null: false
+    t.string "state"
     t.index ["show_id"], name: "index_live_streams_on_show_id"
   end
 

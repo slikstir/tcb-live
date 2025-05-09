@@ -1,5 +1,10 @@
-<%= turbo_stream_from 'page_reload' %>
-<div id="page_reload"></div>
+<% if @live_stream.present? %>
+  <%= turbo_stream_from 'live_stream_page_reload' %>
+  <div id="live_stream_page_reload"></div>
+<% else %>
+  <%= turbo_stream_from 'show_page_reload' %>
+  <div id="show_page_reload"></div>
+<% end %>
 
 <% if @show.template.present? %>
   <% content_for :show_css do %>

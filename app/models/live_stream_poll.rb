@@ -21,8 +21,15 @@
 #  fk_rails_...  (poll_id => polls.id)
 #
 class LiveStreamPoll < ApplicationRecord
+  STATES = %w[closed open].freeze
+
+  validates :state, inclusion: { in: STATES }
+  
   belongs_to :live_stream
   belongs_to :poll
+
+  after_initialize :set_defaults, if: :new_record?
+  after_save :broadcast_page_reload, if: :saved_change_to_state?
   
   def stream_delay
     if self[:stream_delay].present?
@@ -30,6 +37,20 @@ class LiveStreamPoll < ApplicationRecord
     else
       self.live_stream.stream_delay
     end
+  end
+
+  private
+
+  def set_defaults
+    self.state = 'closed'
+  end
+
+  def broadcast_page_reload
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "live_stream_page_reload",
+      target: "live_stream_page_reload",
+      partial: "shared/reload"
+    )
   end
 
 end

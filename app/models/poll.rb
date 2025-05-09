@@ -117,8 +117,8 @@ class Poll < ApplicationRecord
 
   def broadcast_page_reload
     Turbo::StreamsChannel.broadcast_replace_to(
-      "page_reload",
-      target: "page_reload",
+      "show_page_reload",
+      target: "show_page_reload",
       partial: "shared/reload"
     )
   end
