@@ -26,7 +26,11 @@ class ShowsController < ApplicationController
       @vote = Vote.new
     end
 
-    redirect_to root_path, alert: "Sorry, this show isn't currently available" unless @show.public?
+    if @live_stream.present? && !@live_stream.public?
+      redirect_to root_path, alert: "Sorry, this show isn't currently available"
+    elsif !@show.public?
+      redirect_to root_path, alert: "Sorry, this show isn't currently available"
+    end
   end
 
   private

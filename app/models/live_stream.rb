@@ -46,7 +46,11 @@ class LiveStream < ApplicationRecord
       state == state_name
     end
   end
-  
+
+  def public?
+    %w[preshow live postshow].include?(state)
+  end
+
   def attendees_count
     show_attendees.count
   end

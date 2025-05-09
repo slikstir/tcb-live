@@ -19,14 +19,26 @@
 
 <% end %>
 
-<% if @show.preshow? %>
-  <%= render 'shows/pre_show', show: @show %>
-<% elsif @show.postshow? %>
-  <%= render 'shows/post_show', show: @show %>
-<% elsif @show.live? && @show.active_polls? %>
-  <%= render 'shows/poll', show: @show %>
-<% elsif @show.live? %>
-  <%= render 'shows/stand_by', show: @show %>
+<% if @live_stream.present? %>
+  <% if @live_stream.preshow? %>
+    <%= render 'shows/pre_show', show: @show %>
+  <% elsif @live_stream.postshow? %>
+    <%= render 'shows/post_show', show: @show %>
+  <% elsif @live_stream.live? && @show.active_polls? %>
+    <%= render 'shows/poll', show: @show %>
+  <% elsif @live_stream.live? %>
+    <%= render 'shows/stand_by', show: @show %>
+  <% end %>
+<% else %>
+  <% if @show.preshow? %>
+    <%= render 'shows/pre_show', show: @show %>
+  <% elsif @show.postshow? %>
+    <%= render 'shows/post_show', show: @show %>
+  <% elsif @show.live? && @show.active_polls? %>
+    <%= render 'shows/poll', show: @show %>
+  <% elsif @show.live? %>
+    <%= render 'shows/stand_by', show: @show %>
+  <% end %>
 <% end %>
 
 <% if @footer.present? || @show.footer.present? %>
